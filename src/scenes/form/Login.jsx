@@ -55,7 +55,7 @@ const Login = () => {
             textAlign: 'center',
           }}
         >
-          <Header title="Login In" subtitle="Login to sigma dashboard" />
+          <Header title="SIGMA DASHBOARD" subtitle="Login to sigma dashboard" />
 
           <Formik
             onSubmit={handleFormSubmit}
