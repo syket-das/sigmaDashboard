@@ -1,4 +1,4 @@
-import React, { useEffect, CSSProperties } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import * as yup from 'yup';
