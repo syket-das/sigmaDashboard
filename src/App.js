@@ -16,6 +16,7 @@ import Geography from './scenes/geography';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ColorModeContext, useMode } from './theme';
 import Calendar from './scenes/calendar/calendar';
+import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,7 +34,15 @@ function App() {
             {user && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
               <Route path="/login" exact element={<Login />} />
-              <Route path="/" exact element={<Dashboard />} />
+              <Route
+                path="/"
+                exact
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/form" element={<Register />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
