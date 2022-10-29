@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { HashLoader } from 'react-spinners';
 import { login } from '../../redux/actions/userActions';
 import { toast } from 'react-toastify';
+import HashLoaderComponent from '../../components/loader/HashLoaderComponent';
 const Login = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
@@ -30,24 +31,12 @@ const Login = () => {
     dispatch(login(values.email, values.password));
   };
 
-  const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red',
-  };
+
   return (
     <>
       {error && notify()}
       {loading ? (
-        <HashLoader
-          color={'#3f51b5'}
-          loading={loading}
-          cssOverride={override}
-          size={150}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-          style={{ marginTop: '20%', marginLeft: '50%' }}
-        />
+        <HashLoaderComponent loading={loading} />
       ) : (
         <Box
           m="20px"

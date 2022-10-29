@@ -17,6 +17,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ColorModeContext, useMode } from './theme';
 import Calendar from './scenes/calendar/calendar';
 import { ProtectedRoute } from './routes/ProtectedRoute';
+import PartnerUniversities from './scenes/universities/PartnerUniversities';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -53,6 +54,15 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              {/* protected - university */}
+              <Route
+                path="/partner-universities"
+                element={
+                  <ProtectedRoute>
+                    <PartnerUniversities />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </main>
         </div>

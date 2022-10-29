@@ -6,10 +6,12 @@ import {
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers';
+import { universityListReducer } from './reducers/university/universityReducers';
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  universityList: universityListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
