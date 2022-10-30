@@ -1,4 +1,4 @@
-import { Download, Update } from '@mui/icons-material';
+import { Download, More, Update } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -6,6 +6,11 @@ import {
   CardContent,
   CardMedia,
   Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -25,16 +30,22 @@ const UniversityProfile = () => {
           subtitle="Manage university information "
         />
       </Box>
-      {/* Row - 1 */}
-      <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap="20px">
+
+      <Box
+        display="grid"
+        gap="20px"
+        gridTemplateAreas={`
+          'basic mou  updates'
+          'contact contact updates'
+          
+        `}
+      >
         <Box
-          gridColumn="span 6"
-          gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          gridAutoRows="140px"
           height="400px"
           p="30px"
           overflow="auto"
+          gridArea="basic"
         >
           <Typography
             variant="h5"
@@ -180,12 +191,11 @@ const UniversityProfile = () => {
           </Button>
         </Box>
         <Box
-          gridColumn="span 6"
-          gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
           height="400px"
           p="30px"
+          gridArea="mou"
         >
           <Typography
             variant="h5"
@@ -202,7 +212,6 @@ const UniversityProfile = () => {
             overflow="auto"
             mt="10px"
           >
-        
             <Card
               sx={{
                 display: 'flex',
@@ -259,6 +268,196 @@ const UniversityProfile = () => {
                 ></iframe>
               </CardMedia>
             </Card>
+          </Box>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="contact"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            Basic Details
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="10px"
+          >
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '120px',
+                }}
+              >
+                <b>Name</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">
+                Uni Of California, Los Angeles
+              </Typography>
+            </TextRow>
+
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '120px',
+                }}
+              >
+                <b>Country</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">America</Typography>
+            </TextRow>
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '100px',
+                }}
+              >
+                <b>City</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">Los Angeles, California</Typography>
+            </TextRow>
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '120px',
+                }}
+              >
+                <b>Address</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">
+                1234, Westwood Blvd, Los Angeles, CA 90095
+              </Typography>
+            </TextRow>
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '120px',
+                }}
+              >
+                <b>Website</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">https://www.ucla.edu/</Typography>
+            </TextRow>
+
+            <TextRow>
+              <Typography
+                sx={{
+                  width: '120px',
+                }}
+              >
+                <b>Created At</b>
+              </Typography>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: '10px',
+                }}
+              />
+
+              <Typography variant="h5">20-10-2022</Typography>
+            </TextRow>
+          </Box>
+          <Button
+            sx={{
+              backgroundColor: colors.greenAccent[700],
+              color: colors.grey[100],
+              fontSize: '14px',
+              fontWeight: 'bold',
+              padding: '10px 20px',
+              mt: '30px',
+            }}
+          >
+            <Update sx={{ mr: '10px' }} />
+            Update Details
+          </Button>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          // height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="updates"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            Recent Updates
+          </Typography>
+          <Box mt="10px">
+            <List sx={{ width: '100%' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText
+                  primary="Brunch this weekend?"
+                  secondary={
+                    <React.Fragment>
+                      {
+                        "I'll be in your neighborhood doing errands this…bdfx bdf df b dgh hf dh fh dfh hdf hf dfh hdf dhf xdhd xghgf  fgxfxhf gxhf xfh h g dyrh  hry dhry dhyr dhry dhry dryh ydhr rdrhy rdhy drhy"
+                      }
+                    </React.Fragment>
+                  }
+                />
+              </ListItemButton>
+              <Divider variant="inset" component="li" />
+            </List>
           </Box>
         </Box>
       </Box>
