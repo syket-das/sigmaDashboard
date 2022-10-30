@@ -18,6 +18,7 @@ import { ColorModeContext, useMode } from './theme';
 import Calendar from './scenes/calendar/calendar';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import PartnerUniversities from './scenes/universities/PartnerUniversities';
+import UniversityProfile from './scenes/universities/UniversityProfile';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -60,6 +61,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <PartnerUniversities />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/partner-universities/:id"
+                element={
+                  <ProtectedRoute>
+                    <UniversityProfile />
                   </ProtectedRoute>
                 }
               />
