@@ -253,10 +253,7 @@ const UniversityProfile = () => {
 
               <CardMedia
                 component="ifreame"
-                sx={{
-                  // width: 151,
-                  height: 151,
-                }}
+             
               >
                 <iframe
                   src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
