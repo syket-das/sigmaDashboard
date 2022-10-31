@@ -6,6 +6,7 @@ const HashLoaderComponent = (loading) => {
         display: 'block',
         margin: '0 auto',
         borderColor: 'red',
+       
       };
   return (
     <div>

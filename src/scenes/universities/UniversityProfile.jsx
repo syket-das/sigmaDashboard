@@ -20,6 +20,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import TextRow from '../../components/text/TextRow';
 import { tokens } from '../../theme';
+import UniversityPrograms from './UniversityPrograms';
 
 const UniversityProfile = () => {
   const theme = useTheme();
@@ -39,6 +40,8 @@ const UniversityProfile = () => {
         gridTemplateAreas={`
           'basic mou  updates'
           'contact financial updates'
+          'document application updates'
+          'faculty programs programs'
           
         `}
       >
@@ -443,6 +446,165 @@ const UniversityProfile = () => {
               </ListItemButton>
               <Divider variant="inset" component="li" />
             </List>
+          </Box>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="document"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            Documents Required
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="10px"
+          >
+            <List sx={{ width: '100%', overflow: 'auto' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+            </List>
+          </Box>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="application"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            Application Process
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="10px"
+          >
+            <List sx={{ width: '100%', overflow: 'auto' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+            </List>
+          </Box>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="faculty"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            Student Faculty Mobility
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="10px"
+          >
+            <List sx={{ width: '100%', overflow: 'auto' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+            </List>
+          </Box>
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="programs"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
+          >
+            University Programs
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            // alignItems="center"
+            mt="10px"
+          >
+           <UniversityPrograms />
           </Box>
         </Box>
       </Box>

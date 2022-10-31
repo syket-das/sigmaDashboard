@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { Avatar, Box, IconButton, Typography, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from '../../theme';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -64,6 +64,16 @@ const Sidebar = () => {
 
     return color;
   }
+  let height = '100%';
+
+  if (
+    window.location.pathname.includes('partner-universities/') 
+   
+  ) {
+    height = '200vh';
+  }
+
+  
 
   function stringAvatar(name) {
     return {
@@ -74,8 +84,14 @@ const Sidebar = () => {
     };
   }
 
+
+
   return (
     <Box
+      style={{
+        height: `${height ? height : '100%'}`,
+      }}
+      className="sidebar"
       sx={{
         '& .pro-sidebar-inner': {
           background: `${colors.primary[400]} !important`,
