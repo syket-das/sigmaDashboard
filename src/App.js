@@ -18,7 +18,7 @@ import { ColorModeContext, useMode } from './theme';
 import Calendar from './scenes/calendar/calendar';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import PartnerUniversities from './scenes/universities/PartnerUniversities';
-import UniversityProfile from './scenes/universities/UniversityProfile';
+import UniversityProfile from './scenes/universities/universityProfile/UniversityProfile';
 
 function App() {
   const [theme, colorMode] = useMode();

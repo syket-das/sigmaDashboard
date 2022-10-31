@@ -17,10 +17,10 @@ import {
   useTheme,
 } from '@mui/material';
 import React from 'react';
-import Header from '../../components/Header';
-import TextRow from '../../components/text/TextRow';
-import { tokens } from '../../theme';
-import UniversityPrograms from './UniversityPrograms';
+import Header from '../../../components/Header';
+import TextRow from '../../../components/text/TextRow';
+import { tokens } from '../../../theme';
+import UniversityPrograms from '../UniversityPrograms';
 
 const UniversityProfile = () => {
   const theme = useTheme();
@@ -256,7 +256,7 @@ const UniversityProfile = () => {
                 </CardContent>
               </Box>
 
-              <CardMedia component="ifreame">
+              <CardMedia component="iframe">
                 <iframe
                   src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
                   width="100%"
@@ -604,7 +604,7 @@ const UniversityProfile = () => {
             // alignItems="center"
             mt="10px"
           >
-           <UniversityPrograms />
+            <UniversityPrograms />
           </Box>
         </Box>
       </Box>
