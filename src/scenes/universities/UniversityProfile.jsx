@@ -1,5 +1,6 @@
 import { Download, More, Update } from '@mui/icons-material';
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -9,6 +10,7 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemButton,
   ListItemText,
   Typography,
@@ -36,7 +38,7 @@ const UniversityProfile = () => {
         gap="20px"
         gridTemplateAreas={`
           'basic mou  updates'
-          'contact contact updates'
+          'contact financial updates'
           
         `}
       >
@@ -251,10 +253,7 @@ const UniversityProfile = () => {
                 </CardContent>
               </Box>
 
-              <CardMedia
-                component="ifreame"
-             
-              >
+              <CardMedia component="ifreame">
                 <iframe
                   src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
                   width="100%"
@@ -280,7 +279,7 @@ const UniversityProfile = () => {
             align="center"
             color={colors.greenAccent[400]}
           >
-            Basic Details
+            Contact Person
           </Typography>
           <Box
             display="flex"
@@ -288,134 +287,123 @@ const UniversityProfile = () => {
             alignItems="center"
             mt="10px"
           >
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '120px',
+            <List sx={{ width: '100%', overflow: 'auto' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
                 }}
               >
-                <b>Name</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
+                <ListItemAvatar>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary="Syket Das"
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        sx={{ display: 'inline' }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        <TextRow>
+                          <b>Email</b>
+                          <Divider
+                            orientation="vertical"
+                            flexItem
+                            sx={{
+                              mx: '10px',
+                            }}
+                          />
 
-              <Typography variant="h5">
-                Uni Of California, Los Angeles
-              </Typography>
-            </TextRow>
+                          <Typography variant="h5">
+                            saiketsd23@gmail.com
+                          </Typography>
+                        </TextRow>
+                        <TextRow>
+                          <b>Phone</b>
+                          <Divider
+                            orientation="vertical"
+                            flexItem
+                            sx={{
+                              mx: '10px',
+                            }}
+                          />
 
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '120px',
-                }}
-              >
-                <b>Country</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
+                          <Typography variant="h5">+91 8100156406</Typography>
+                        </TextRow>
+                        <TextRow>
+                          <b>Description</b>
+                          <Divider
+                            orientation="vertical"
+                            flexItem
+                            sx={{
+                              mx: '10px',
+                            }}
+                          />
 
-              <Typography variant="h5">America</Typography>
-            </TextRow>
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '100px',
-                }}
-              >
-                <b>City</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
-
-              <Typography variant="h5">Los Angeles, California</Typography>
-            </TextRow>
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '120px',
-                }}
-              >
-                <b>Address</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
-
-              <Typography variant="h5">
-                1234, Westwood Blvd, Los Angeles, CA 90095
-              </Typography>
-            </TextRow>
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '120px',
-                }}
-              >
-                <b>Website</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
-
-              <Typography variant="h5">https://www.ucla.edu/</Typography>
-            </TextRow>
-
-            <TextRow>
-              <Typography
-                sx={{
-                  width: '120px',
-                }}
-              >
-                <b>Created At</b>
-              </Typography>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: '10px',
-                }}
-              />
-
-              <Typography variant="h5">20-10-2022</Typography>
-            </TextRow>
+                          <Typography variant="h5">
+                            SEM Exchange Team
+                          </Typography>
+                        </TextRow>
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
+              </ListItemButton>
+            </List>
           </Box>
-          <Button
-            sx={{
-              backgroundColor: colors.greenAccent[700],
-              color: colors.grey[100],
-              fontSize: '14px',
-              fontWeight: 'bold',
-              padding: '10px 20px',
-              mt: '30px',
-            }}
+        </Box>
+        <Box
+          backgroundColor={colors.primary[400]}
+          height="400px"
+          p="30px"
+          overflow="auto"
+          gridArea="financial"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            align="center"
+            color={colors.greenAccent[400]}
           >
-            <Update sx={{ mr: '10px' }} />
-            Update Details
-          </Button>
+            Financial Agreements
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="10px"
+          >
+            <List sx={{ width: '100%', overflow: 'auto' }}>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+              <ListItemButton
+                alignItems="flex-start"
+                style={{
+                  marginTop: '10px',
+                  maxHeight: '100px',
+                  overflow: 'auto',
+                }}
+              >
+                <ListItemText primary="Syket Das shdjdk sd sd sd sd sd sd s sd sd sd sd sd sd sd sd sd sd " />
+              </ListItemButton>
+            </List>
+          </Box>
         </Box>
         <Box
           backgroundColor={colors.primary[400]}
@@ -433,7 +421,7 @@ const UniversityProfile = () => {
             Recent Updates
           </Typography>
           <Box mt="10px">
-            <List sx={{ width: '100%' }}>
+            <List sx={{ width: '100%', overflow: 'auto' }}>
               <ListItemButton
                 alignItems="flex-start"
                 style={{
@@ -466,3 +454,6 @@ export default UniversityProfile;
 
 // random pdf link
 // https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+
+// avatar url link
+// https://www.w3schools.com/howto/img_avatar.png
