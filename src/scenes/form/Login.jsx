@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardMedia,
+  TextField,
+} from '@mui/material';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -31,7 +38,6 @@ const Login = () => {
     dispatch(login(values.email, values.password));
   };
 
-
   return (
     <>
       {error && notify()}
@@ -61,15 +67,28 @@ const Login = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Box
-                  display="grid"
-                  gap="30px"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   sx={{
-                    '& > div': {
-                      gridColumn: isNonMobile ? undefined : 'span 4',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '30px',
+                    '& > *': {
+                      maxWidth: '400px',
                     },
                   }}
                 >
+                  <Card sx={{ maxWidth: 400,
+                    maxHeight: 400,
+                  }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        image="https://source.unsplash.com/random"
+                        alt="green iguana"
+                      />
+                    </CardActionArea>
+                  </Card>
                   <TextField
                     fullWidth
                     variant="filled"
@@ -81,7 +100,6 @@ const Login = () => {
                     name="email"
                     error={!!touched.email && !!errors.email}
                     helperText={touched.email && errors.email}
-                    sx={{ gridColumn: 'span 4' }}
                   />
                   <TextField
                     fullWidth
@@ -94,11 +112,14 @@ const Login = () => {
                     name="password"
                     error={!!touched.password && !!errors.password}
                     helperText={touched.password && errors.password}
-                    sx={{ gridColumn: 'span 4' }}
                   />
-                </Box>
-                <Box display="flex" justifyContent="end" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained">
+
+                  <Button
+                    type="submit"
+                    color="secondary"
+                    variant="contained"
+                    fullWidth
+                  >
                     Login
                   </Button>
                 </Box>
@@ -121,3 +142,5 @@ const initialValues = {
 };
 
 export default Login;
+
+// random img url  https://source.unsplash.com/random
