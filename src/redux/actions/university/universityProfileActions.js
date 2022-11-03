@@ -76,7 +76,7 @@ export const universityProfileContacts = (universityId) => async (dispatch) => {
     dispatch({ type: UNIVERSITY_PROFILE_CONTACT_REQUEST });
 
     const { data } = await axios.get(
-      `/api/v2/university/contact/${universityId}`
+      `${baseUrl}/api/v2/university/contact/${universityId}`
     );
 
     dispatch({
