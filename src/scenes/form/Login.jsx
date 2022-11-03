@@ -78,9 +78,7 @@ const Login = () => {
                     },
                   }}
                 >
-                  <Card sx={{ maxWidth: 400,
-                    maxHeight: 400,
-                  }}>
+                  <Card sx={{ maxWidth: 400, maxHeight: 350 }}>
                     <CardActionArea>
                       <CardMedia
                         component="img"

@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from '../../theme';
@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material';
 import { useEffect } from 'react';
 import { universityList } from '../../redux/actions/university/universityActions';
 import { toast } from 'react-toastify';
-import HashLoaderComponent from '../../components/loader/HashLoaderComponent';
 import { Link } from 'react-router-dom';
 
 const UniversityPrograms = () => {
@@ -81,9 +80,18 @@ const UniversityPrograms = () => {
   ];
 
   return (
-    <div >
+    <div>
       {loading ? (
-        <HashLoaderComponent loading={loading} />
+        <Box
+          m="20px"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <CircularProgress color="inherit" />
+        </Box>
       ) : (
         <Box m="20px" width={'100%'}>
           <Box
@@ -120,9 +128,9 @@ const UniversityPrograms = () => {
             }}
           >
             <DataGrid
-            style={{
+              style={{
                 minWidth: '100%',
-            }}
+              }}
               getRowId={(row) => row._id}
               rows={universitityList}
               columns={columns}

@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { HashLoader } from 'react-spinners';
 
 const HashLoaderComponent = (loading) => {
-      const override = {
-        display: 'block',
-        margin: '0 auto',
-        borderColor: 'red',
-       
-      };
+  const override = {
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'red',
+  };
   return (
     <div>
       <HashLoader
@@ -21,6 +20,6 @@ const HashLoaderComponent = (loading) => {
       />
     </div>
   );
-}
+};
 
-export default HashLoaderComponent
+export default HashLoaderComponent;
