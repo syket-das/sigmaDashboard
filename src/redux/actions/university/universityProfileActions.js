@@ -52,7 +52,9 @@ export const universityProfileMOUS = (universityId) => async (dispatch) => {
   try {
     dispatch({ type: UNIVERSITY_PROFILE_MOU_REQUEST });
 
-    const { data } = await axios.get(`/api/v2/university/mou/${universityId}`);
+    const { data } = await axios.get(
+      `${baseUrl}/api/v2/university/mou/${universityId}`
+    );
 
     dispatch({
       type: UNIVERSITY_PROFILE_MOU_SUCCESS,

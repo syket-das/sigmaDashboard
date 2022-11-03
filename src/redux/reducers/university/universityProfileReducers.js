@@ -25,7 +25,7 @@ import {
 export const universityProfileReducer = (
   state = {
     basic: {},
-    mous: [],
+    mous: {},
     contacts: [],
     aggrements: [],
     updates: [],
@@ -57,113 +57,149 @@ export const universityProfileReducer = (
     case UNIVERSITY_PROFILE_BASIC_FAIL:
       return {
         ...state,
-        basic:{
-            loading: false,
-            error: action.payload,
-        }
+        basic: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_MOU_REQUEST:
       return {
         ...state,
-        loading: true,
+        mous: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_MOU_SUCCESS:
       return {
         ...state,
-        loading: false,
-        mous: action.payload,
+        mous: {
+          loading: false,
+          mous: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_MOU_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        mous: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_CONTACT_REQUEST:
       return {
         ...state,
-        loading: true,
+        contacts: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_CONTACT_SUCCESS:
       return {
         ...state,
-        loading: false,
-        contacts: action.payload,
+        contacts: {
+          loading: false,
+          contacts: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_CONTACT_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        contacts: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST:
       return {
         ...state,
-        loading: true,
+        aggrements: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS:
       return {
         ...state,
-        loading: false,
-        aggrements: action.payload,
+        aggrements: {
+          loading: false,
+          aggrements: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        aggrements: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_UPDATES_REQUEST:
       return {
         ...state,
-        loading: true,
+        updates: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_UPDATES_SUCCESS:
       return {
         ...state,
-        loading: false,
-        updates: action.payload,
+        updates: {
+          loading: false,
+          updates: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_UPDATES_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        updates: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_REQUEST:
       return {
         ...state,
-        loading: true,
+        documents: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_SUCCESS:
       return {
         ...state,
-        loading: false,
-        documents: action.payload,
+        documents: {
+          loading: false,
+          documents: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        documents: {
+          loading: false,
+          error: action.payload,
+        },
       };
     case UNIVERSITY_PROFILE_APPLICATION_REQUEST:
       return {
         ...state,
-        loading: true,
+        applicationProcess: {
+          loading: true,
+        },
       };
     case UNIVERSITY_PROFILE_APPLICATION_SUCCESS:
       return {
         ...state,
-        loading: false,
-        applicationProcess: action.payload,
+        applicationProcess: {
+          loading: false,
+          applicationProcess: action.payload,
+        },
       };
 
     case UNIVERSITY_PROFILE_APPLICATION_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        applicationProcess: {
+          loading: false,
+          error: action.payload,
+        },
       };
 
     default:
