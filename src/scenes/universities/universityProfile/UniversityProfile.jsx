@@ -27,6 +27,8 @@ import UniversityProfileBasic from './UniversityProfileBasic';
 import UniversityProfileContacts from './UniversityProfileContacts';
 import UniversityProfileDocumentsRequired from './UniversityProfileDocumentsRequired';
 import UniversityProfileFacultyMobility from './UniversityProfileFacultyMobility';
+import UniversityProfileGuestVisits from './UniversityProfileGuestVisits';
+import UniversityProfileMeetings from './UniversityProfileMeetings';
 import UniversityProfileMous from './UniversityProfileMous';
 import UniversityProfilePrograms from './UniversityProfilePrograms';
 import UniversityProfileUpdates from './UniversityProfileUpdates';
@@ -50,20 +52,21 @@ const UniversityProfile = () => {
           'basic mou  updates'
           'contact financial updates'
           'document application updates'
+          'guestVisit guestVisit meetings'
           'faculty programs programs'
           
         `}
       >
         <UniversityProfileBasic />
         <UniversityProfileMous />
-
         <UniversityProfileContacts />
         <UniversityProfileAgreements />
-
         <UniversityProfileUpdates />
-      <UniversityProfileDocumentsRequired />
-     <UniversityProfileApplicationProcess />
-      <UniversityProfileFacultyMobility />
+        <UniversityProfileDocumentsRequired />
+        <UniversityProfileApplicationProcess />
+        <UniversityProfileGuestVisits />
+        <UniversityProfileMeetings />
+        <UniversityProfileFacultyMobility />
         <UniversityProfilePrograms />
       </Box>
     </Box>
