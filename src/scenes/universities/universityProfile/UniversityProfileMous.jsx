@@ -72,6 +72,7 @@ const UniversityProfileMous = () => {
                   width: '100%',
                   mt: '10px',
                 }}
+                key={mou._id}
               >
                 <Box
                   sx={{
@@ -112,9 +113,10 @@ const UniversityProfileMous = () => {
 
                 <CardMedia component="div">
                   <iframe
-                    src={` https://docs.google.com/gview?url=${mou.file.f_url}&embedded=true`}
+                    src={` https://docs.google.com/gview?url=${mou.file.f_url}&embedded=true#toolbar=0&navpanes=0&scrollbar=0`}
                     width="100%"
                     title="pdf"
+                    frameborder="0"
                     style={{
                       overflow: 'hidden',
                     }}

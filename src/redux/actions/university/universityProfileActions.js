@@ -100,7 +100,7 @@ export const universityProfileAggrements =
       dispatch({ type: UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST });
 
       const { data } = await axios.get(
-        `/api/v2/university/extra/finincialAgreements/${universityId}`
+        `${baseUrl}/api/v2/university/extra/finincialAgreements/${universityId}`
       );
 
       dispatch({
@@ -123,7 +123,7 @@ export const universityProfileUpdates = (universityId) => async (dispatch) => {
     dispatch({ type: UNIVERSITY_PROFILE_UPDATES_REQUEST });
 
     const { data } = await axios.get(
-      `/api/v2/university/update/${universityId}`
+      `${baseUrl}/api/v2/university/update/${universityId}`
     );
 
     dispatch({
