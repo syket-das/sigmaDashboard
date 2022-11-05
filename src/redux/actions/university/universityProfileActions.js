@@ -147,7 +147,7 @@ export const universityProfileDocuments =
       dispatch({ type: UNIVERSITY_PROFILE_DOCUMENT_REQUEST });
 
       const { data } = await axios.get(
-        `/api/v2/university/extra/documents/${universityId}`
+        `${baseUrl}/api/v2/university/extra/documents/${universityId}`
       );
 
       dispatch({
@@ -171,7 +171,7 @@ export const universityProfileApplications =
       dispatch({ type: UNIVERSITY_PROFILE_APPLICATION_REQUEST });
 
       const { data } = await axios.get(
-        `/api/v2/university/extra/applications/${universityId}`
+        `${baseUrl}/api/v2/university/extra/applications/${universityId}`
       );
 
       dispatch({
