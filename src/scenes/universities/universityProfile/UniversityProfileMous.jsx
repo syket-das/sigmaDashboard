@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { Download } from '@mui/icons-material';
+import {
+  Autorenew,
+  Download,
+  LocalDiningSharp,
+  UpdateSharp,
+} from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -7,7 +12,15 @@ import {
   CardContent,
   CardMedia,
   CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
+  IconButton,
+  Stack,
+  TextField,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -27,9 +40,35 @@ const UniversityProfileMous = () => {
   );
 
   useEffect(() => {
-    
     dispatch(uniMous(params.id));
   }, [dispatch, params.id]);
+
+  const [open, setOpen] = React.useState(false);
+  const [title, setTitle] = React.useState('');
+  const [type, setType] = React.useState('');
+  const [startDate, setStartDate] = React.useState('');
+  const [endDate, setEndDate] = React.useState('');
+
+  const handleClickOpen = (mou) => {
+    setOpen(true);
+    setTitle(mou.title);
+    setType(mou.type);
+    setStartDate(mou.startDate);
+    setEndDate(mou.endDate);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = () => {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('type', type);
+    formData.append('startDate', startDate);
+    formData.append('endDate', endDate);
+  };
+
   return (
     <>
       {loading ? (
@@ -95,19 +134,29 @@ const UniversityProfileMous = () => {
                     <Typography variant="subtitle1" color="text.secondary">
                       <b>End Date</b> : {mou.endDate}
                     </Typography>
-                    <Button
-                      sx={{
-                        backgroundColor: colors.greenAccent[700],
-                        mt: '10px',
-                      }}
-                      variant="contained"
-                      color="success"
-                      size="small"
-                      onClick={() => window.open(mou.file.f_url)}
+
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      justifyContent="space-between"
+                      m={'5px'}
                     >
-                      <Download sx={{ mr: '10px' }} />
-                      Download
-                    </Button>
+                      <IconButton
+                        aria-label="download"
+                        color="secondary"
+                        onClick={() => window.open(mou.file.f_url)}
+                      >
+                        <Download />
+                      </IconButton>
+
+                      <IconButton
+                        aria-label="update"
+                        color="success"
+                        onClick={() => handleClickOpen(mou)}
+                      >
+                        <UpdateSharp />
+                      </IconButton>
+                    </Stack>
                   </CardContent>
                 </Box>
 
@@ -124,6 +173,87 @@ const UniversityProfileMous = () => {
                 </CardMedia>
               </Card>
             ))}
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Update University MOU Details</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  To update the MOU details of the university, please enter the
+                  details here. If you don't want to update click cancel.
+                </DialogContentText>
+                <form>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="title"
+                    label="Title"
+                    type="text"
+                    fullWidth
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="type"
+                    label="Type"
+                    type="text"
+                    fullWidth
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                  />
+
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="startDate"
+                    label="Start Date"
+                    type="date"
+                    fullWidth
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="endDate"
+                    label="End Date"
+                    type="date"
+                    fullWidth
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  sx={{
+                    backgroundColor: colors.redAccent[700],
+                    color: colors.grey[100],
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    padding: '10px 20px',
+                    mt: '30px',
+                  }}
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  sx={{
+                    backgroundColor: colors.greenAccent[700],
+                    color: colors.grey[100],
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    padding: '10px 20px',
+                    mt: '30px',
+                  }}
+                  onClick={handleUpdate()}
+                >
+                  Update
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         </Box>
       )}
