@@ -1,12 +1,19 @@
 import {
   Avatar,
   Box,
+  Button,
   CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   List,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
+  TextField,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -30,6 +37,32 @@ const UniversityProfileContacts = () => {
   useEffect(() => {
     dispatch(universityProfileContacts(params.id));
   }, [dispatch, params.id]);
+
+  const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [designation, setDesignation] = React.useState('');
+
+  const handleClickOpen = (contact) => {
+    setOpen(true);
+    setName(contact.name);
+    setEmail(contact.email);
+    setPhone(contact.phone);
+    setDesignation(contact.description);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = () => {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('description', designation);
+  };
 
   return (
     <>
@@ -68,6 +101,7 @@ const UniversityProfileContacts = () => {
             <List sx={{ width: '100%', overflow: 'auto' }}>
               {contacts?.contacts.map((contact) => (
                 <ListItemButton
+                  onClick={() => handleClickOpen(contact)}
                   key={contact._id}
                   alignItems="flex-start"
                   style={{
@@ -142,6 +176,88 @@ const UniversityProfileContacts = () => {
                 </ListItemButton>
               ))}
             </List>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Update University Contact Details</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  To update the Contact details of the university, please enter
+                  the details here. If you don't want to update click cancel.
+                </DialogContentText>
+                <form>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Name"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="email"
+                    label="Email"
+                    type="email"
+                    fullWidth
+                    variant="standard"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="phone"
+                    label="Phone"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+
+                  <TextField
+                    margin="dense"
+                    id="designation"
+                    label="Designation"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={designation}
+                    onChange={(e) => setDesignation(e.target.value)}
+                  />
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  sx={{
+                    backgroundColor: colors.redAccent[700],
+                    color: colors.grey[100],
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    padding: '10px 20px',
+                    mt: '30px',
+                  }}
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  sx={{
+                    backgroundColor: colors.greenAccent[700],
+                    color: colors.grey[100],
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    padding: '10px 20px',
+                    mt: '30px',
+                  }}
+                  onClick={handleUpdate()}
+                >
+                  Update
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         </Box>
       )}
