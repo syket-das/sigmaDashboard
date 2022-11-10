@@ -1,83 +1,106 @@
-import { Box, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from '../../theme';
 import { useTheme } from '@mui/material';
-import { useEffect } from 'react';
-import { universityList } from '../../redux/actions/university/universityActions';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { universityProfilePrograms } from '../../redux/actions/university/universityProfileActions';
 
 const UniversityPrograms = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const params = useParams();
   const colors = tokens(theme.palette.mode);
-  const { loading, error, universities } = useSelector(
-    (state) => state.universityList
+  const { loading, error, programs } = useSelector(
+    (state) => state.universityProfile.programs
   );
-
-  const { universities: universitityList = [] } = universities;
 
   useEffect(() => {
     if (error) {
       toast(error);
     }
 
-    dispatch(universityList());
-
-    setTimeout(() => {
-      dispatch(universityList());
-    }, 10000);
-  }, [dispatch, error]);
+    dispatch(universityProfilePrograms(params.id));
+  }, [dispatch, error, params.id]);
 
   const columns = [
     {
-      field: 'name',
-      headerName: 'Name',
+      field: 'lpu_name',
+      headerName: 'Lpu Degree',
       flex: 1,
       cellClassName: 'name-column--cell',
     },
     {
-      field: 'country',
-      headerName: 'Country',
+      field: 'forign_name',
+      headerName: 'Forign Degree',
       flex: 1,
     },
     {
-      field: 'city',
-      headerName: 'City',
+      field: 'tutionFees',
+      headerName: 'Tution Fees',
       flex: 1,
     },
     {
-      field: 'website',
-      headerName: 'Website',
+      field: 'scholarship',
+      headerName: 'Scholarship',
       flex: 1,
+    },
 
-      renderCell: (params) => (
-        <a
-          href={params.value}
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: 'inherit' }}
-        >
-          {params.value}
-        </a>
-      ),
-    },
     {
-      field: 'details',
-      headerName: 'Details',
+      field: 'update',
+      headerName: 'Update',
       flex: 1,
       renderCell: (cellValue) => {
         return (
-          <Link to={`/partner-universities/${cellValue.row._id}`}>
-            <Button variant="contained" color="primary">
-              Browse
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleClickOpen(cellValue.row)}
+          >
+            Update
+          </Button>
         );
       },
     },
   ];
+
+  const [open, setOpen] = React.useState(false);
+  const [lpuName, setLpuName] = React.useState('');
+  const [foriegnName, setForiegnName] = React.useState('');
+  const [tutionFees, setTutionFees] = React.useState('');
+  const [scholarship, setScholarship] = React.useState('');
+
+  const handleClickOpen = (program) => {
+    setOpen(true);
+    setLpuName(program.lpu_name);
+    setForiegnName(program.forign_name);
+    setTutionFees(program.tutionFees);
+    setScholarship(program.scholarship);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = () => {
+    const formData = new FormData();
+    formData.append('lpu_name', lpuName);
+    formData.append('forign_name', foriegnName);
+    formData.append('tutionFees', tutionFees);
+    formData.append('scholarship', scholarship);
+  };
 
   return (
     <div>
@@ -132,11 +155,95 @@ const UniversityPrograms = () => {
                 minWidth: '100%',
               }}
               getRowId={(row) => row._id}
-              rows={universitityList}
+              rows={programs.programs}
               columns={columns}
               components={{ Toolbar: GridToolbar }}
             />
           </Box>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Update University Contact Details</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To update the Contact details of the university, please enter
+                the details here. If you don't want to update click cancel.
+              </DialogContentText>
+              <form>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="lpuNmae"
+                  label="Lpu Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={lpuName}
+                  onChange={(e) => setLpuName(e.target.value)}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="foriegnName"
+                  label="Foriegn Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={foriegnName}
+                  onChange={(e) => setForiegnName(e.target.value)}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="tutionFees"
+                  label="Tution Fees"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={tutionFees}
+                  onChange={(e) => setTutionFees(e.target.value)}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="scholarship"
+                  label="Scholarship"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={scholarship}
+                  onChange={(e) => setScholarship(e.target.value)}
+                />
+              </form>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                sx={{
+                  backgroundColor: colors.redAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                sx={{
+                  backgroundColor: colors.greenAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleUpdate()}
+              >
+                Update
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Box>
       )}
     </div>

@@ -17,6 +17,9 @@ import {
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
+  UNIVERSITY_PROFILE_PROGRAM_FAIL,
+  UNIVERSITY_PROFILE_PROGRAM_REQUEST,
+  UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
   UNIVERSITY_PROFILE_UPDATES_FAIL,
   UNIVERSITY_PROFILE_UPDATES_REQUEST,
   UNIVERSITY_PROFILE_UPDATES_SUCCESS,
@@ -197,6 +200,30 @@ export const universityProfileReducer = (
       return {
         ...state,
         applicationProcess: {
+          loading: false,
+          error: action.payload,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_PROGRAM_REQUEST:
+      return {
+        ...state,
+        programs: {
+          loading: true,
+        },
+      };
+    case UNIVERSITY_PROFILE_PROGRAM_SUCCESS:
+      return {
+        ...state,
+        programs: {
+          loading: false,
+          programs: action.payload,
+        },
+      };
+    case UNIVERSITY_PROFILE_PROGRAM_FAIL:
+      return {
+        ...state,
+        programs: {
           loading: false,
           error: action.payload,
         },

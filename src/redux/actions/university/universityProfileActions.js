@@ -18,6 +18,9 @@ import {
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
+  UNIVERSITY_PROFILE_PROGRAM_FAIL,
+  UNIVERSITY_PROFILE_PROGRAM_REQUEST,
+  UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
   UNIVERSITY_PROFILE_UPDATES_FAIL,
   UNIVERSITY_PROFILE_UPDATES_REQUEST,
   UNIVERSITY_PROFILE_UPDATES_SUCCESS,
@@ -188,3 +191,26 @@ export const universityProfileApplications =
       });
     }
   };
+
+export const universityProfilePrograms = (universityId) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_PROGRAM_REQUEST });
+
+    const { data } = await axios.get(
+      `${baseUrl}/api/v2/university/program/${universityId}`
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_PROGRAM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
