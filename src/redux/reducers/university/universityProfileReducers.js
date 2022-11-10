@@ -2,27 +2,51 @@ import {
   UNIVERSITY_PROFILE_APPLICATION_FAIL,
   UNIVERSITY_PROFILE_APPLICATION_REQUEST,
   UNIVERSITY_PROFILE_APPLICATION_SUCCESS,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_BASIC_FAIL,
   UNIVERSITY_PROFILE_BASIC_REQUEST,
   UNIVERSITY_PROFILE_BASIC_SUCCESS,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_CONTACT_FAIL,
   UNIVERSITY_PROFILE_CONTACT_REQUEST,
   UNIVERSITY_PROFILE_CONTACT_SUCCESS,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_DOCUMENT_FAIL,
   UNIVERSITY_PROFILE_DOCUMENT_REQUEST,
   UNIVERSITY_PROFILE_DOCUMENT_SUCCESS,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
+  UNIVERSITY_PROFILE_MOU_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_MOU_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_PROGRAM_FAIL,
   UNIVERSITY_PROFILE_PROGRAM_REQUEST,
   UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_UPDATES_FAIL,
   UNIVERSITY_PROFILE_UPDATES_REQUEST,
   UNIVERSITY_PROFILE_UPDATES_SUCCESS,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS,
 } from '../../constants/university/UniversityProfileConstants';
 
 export const universityProfileReducer = (
@@ -42,6 +66,7 @@ export const universityProfileReducer = (
 ) => {
   switch (action.type) {
     case UNIVERSITY_PROFILE_BASIC_REQUEST:
+    case UNIVERSITY_PROFILE_BASIC_UPDATE_REQUEST:
       return {
         ...state,
         basic: {
@@ -49,6 +74,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_BASIC_SUCCESS:
+    case UNIVERSITY_PROFILE_BASIC_UPDATE_SUCCESS:
       return {
         ...state,
 
@@ -58,6 +84,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_BASIC_FAIL:
+    case UNIVERSITY_PROFILE_BASIC_UPDATE_FAIL:
       return {
         ...state,
         basic: {
@@ -66,6 +93,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_MOU_REQUEST:
+    case UNIVERSITY_PROFILE_MOU_UPDATE_REQUEST:
       return {
         ...state,
         mous: {
@@ -73,6 +101,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_MOU_SUCCESS:
+    case UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS:
       return {
         ...state,
         mous: {
@@ -81,6 +110,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_MOU_FAIL:
+    case UNIVERSITY_PROFILE_MOU_UPDATE_FAIL:
       return {
         ...state,
         mous: {
@@ -89,6 +119,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_CONTACT_REQUEST:
+    case UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST:
       return {
         ...state,
         contacts: {
@@ -96,6 +127,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_CONTACT_SUCCESS:
+    case UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS:
       return {
         ...state,
         contacts: {
@@ -104,6 +136,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_CONTACT_FAIL:
+    case UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL:
       return {
         ...state,
         contacts: {
@@ -112,6 +145,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST:
+    case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST:
       return {
         ...state,
         aggrements: {
@@ -119,6 +153,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS:
+    case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS:
       return {
         ...state,
         aggrements: {
@@ -127,6 +162,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL:
+    case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL:
       return {
         ...state,
         aggrements: {
@@ -135,6 +171,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_UPDATES_REQUEST:
+    case UNIVERSITY_PROFILE_UPDATES_UPDATE_REQUEST:
       return {
         ...state,
         updates: {
@@ -142,6 +179,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_UPDATES_SUCCESS:
+    case UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS:
       return {
         ...state,
         updates: {
@@ -150,6 +188,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_UPDATES_FAIL:
+    case UNIVERSITY_PROFILE_UPDATES_UPDATE_FAIL:
       return {
         ...state,
         updates: {
@@ -158,6 +197,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_REQUEST:
+    case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_REQUEST:
       return {
         ...state,
         documents: {
@@ -165,6 +205,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_SUCCESS:
+    case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS:
       return {
         ...state,
         documents: {
@@ -173,6 +214,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_FAIL:
+    case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_FAIL:
       return {
         ...state,
         documents: {
@@ -181,6 +223,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_APPLICATION_REQUEST:
+    case UNIVERSITY_PROFILE_APPLICATION_UPDATE_REQUEST:
       return {
         ...state,
         applicationProcess: {
@@ -188,6 +231,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_APPLICATION_SUCCESS:
+    case UNIVERSITY_PROFILE_APPLICATION_UPDATE_SUCCESS:
       return {
         ...state,
         applicationProcess: {
@@ -197,6 +241,7 @@ export const universityProfileReducer = (
       };
 
     case UNIVERSITY_PROFILE_APPLICATION_FAIL:
+    case UNIVERSITY_PROFILE_APPLICATION_UPDATE_FAIL:
       return {
         ...state,
         applicationProcess: {
@@ -206,6 +251,7 @@ export const universityProfileReducer = (
       };
 
     case UNIVERSITY_PROFILE_PROGRAM_REQUEST:
+    case UNIVERSITY_PROFILE_PROGRAM_UPDATE_REQUEST:
       return {
         ...state,
         programs: {
@@ -213,6 +259,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_PROGRAM_SUCCESS:
+    case UNIVERSITY_PROFILE_PROGRAM_UPDATE_SUCCESS:
       return {
         ...state,
         programs: {
@@ -221,6 +268,7 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_PROGRAM_FAIL:
+    case UNIVERSITY_PROFILE_PROGRAM_UPDATE_FAIL:
       return {
         ...state,
         programs: {

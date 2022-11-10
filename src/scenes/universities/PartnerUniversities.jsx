@@ -26,10 +26,6 @@ const PartnerUniversities = () => {
     }
 
     dispatch(universityList());
-
-    setTimeout(() => {
-      dispatch(universityList());
-    }, 10000);
   }, [dispatch, error]);
 
   const columns = [
@@ -125,7 +121,7 @@ const PartnerUniversities = () => {
           >
             <DataGrid
               getRowId={(row) => row._id}
-              rows={universitityList}
+              rows={universitityList || []}
               columns={columns}
               components={{ Toolbar: GridToolbar }}
             />

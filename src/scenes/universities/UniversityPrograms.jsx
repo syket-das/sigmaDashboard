@@ -27,13 +27,21 @@ const UniversityPrograms = () => {
     (state) => state.universityProfile.programs
   );
 
+  const [programList, setProgramList] = React.useState([]);
+
   useEffect(() => {
     if (error) {
       toast(error);
     }
 
     dispatch(universityProfilePrograms(params.id));
+
+    
   }, [dispatch, error, params.id]);
+
+
+
+
 
   const columns = [
     {
@@ -102,6 +110,9 @@ const UniversityPrograms = () => {
     formData.append('scholarship', scholarship);
   };
 
+
+
+
   return (
     <div>
       {loading ? (
@@ -155,7 +166,7 @@ const UniversityPrograms = () => {
                 minWidth: '100%',
               }}
               getRowId={(row) => row._id}
-              rows={programs.programs}
+              rows={programs?.programs || []}
               columns={columns}
               components={{ Toolbar: GridToolbar }}
             />
