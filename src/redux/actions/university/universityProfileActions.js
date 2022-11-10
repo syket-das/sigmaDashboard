@@ -12,6 +12,9 @@ import {
   UNIVERSITY_PROFILE_CONTACT_FAIL,
   UNIVERSITY_PROFILE_CONTACT_REQUEST,
   UNIVERSITY_PROFILE_CONTACT_SUCCESS,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_DOCUMENT_FAIL,
   UNIVERSITY_PROFILE_DOCUMENT_REQUEST,
   UNIVERSITY_PROFILE_DOCUMENT_SUCCESS,
@@ -124,6 +127,7 @@ export const updateUniversityProfileMOUS =
         type: UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS,
         payload: data,
       });
+
     } catch (error) {
       dispatch({
         type: UNIVERSITY_PROFILE_MOU_UPDATE_FAIL,
@@ -136,6 +140,9 @@ export const updateUniversityProfileMOUS =
   };
 
 // University Profile MOU
+
+
+// University Profile Contact
 
 export const universityProfileContacts = (universityId) => async (dispatch) => {
   try {
@@ -159,6 +166,33 @@ export const universityProfileContacts = (universityId) => async (dispatch) => {
     });
   }
 };
+
+export const updateUniversityProfileContacts =  (contactId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `${baseUrl}/api/v2/university/contact/${contactId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+
+// University Profile Contact
 
 export const universityProfileAggrements =
   (universityId) => async (dispatch) => {

@@ -39,14 +39,9 @@ const UniversityProfileMous = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-
-
   const { loading, error, mous } = useSelector(
     (state) => state.universityProfile.mous
   );
-
-  const [mouList, setMouList] = React.useState([]);
-
 
   useEffect(() => {
     if (error) {
@@ -84,8 +79,10 @@ const UniversityProfileMous = () => {
     formData.append('endDate', endDate);
 
     dispatch(updateUniversityProfileMOUS(mouId, formData));
-    dispatch(uniMous(params.id));
-    
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(uniMous(params.id));
+    }, 1000);
   };
 
   return (
@@ -193,87 +190,87 @@ const UniversityProfileMous = () => {
               </Card>
             ))}
           </Box>
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Update University MOU Details</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  To update the MOU details of the university, please enter the
-                  details here. If you don't want to update click cancel.
-                </DialogContentText>
-                <form>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="title"
-                    label="Title"
-                    type="text"
-                    fullWidth
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="type"
-                    label="Type"
-                    type="text"
-                    fullWidth
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                  />
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Update University MOU Details</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To update the MOU details of the university, please enter the
+                details here. If you don't want to update click cancel.
+              </DialogContentText>
+              <form>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="title"
+                  label="Title"
+                  type="text"
+                  fullWidth
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="type"
+                  label="Type"
+                  type="text"
+                  fullWidth
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                />
 
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="startDate"
-                    label="Start Date"
-                    type="date"
-                    fullWidth
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="endDate"
-                    label="End Date"
-                    type="date"
-                    fullWidth
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </form>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  sx={{
-                    backgroundColor: colors.redAccent[700],
-                    color: colors.grey[100],
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    padding: '10px 20px',
-                    mt: '30px',
-                  }}
-                  onClick={handleClose}
-                >
-                  Cancel
-                </Button>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="startDate"
+                  label="Start Date"
+                  type="date"
+                  fullWidth
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="endDate"
+                  label="End Date"
+                  type="date"
+                  fullWidth
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </form>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                sx={{
+                  backgroundColor: colors.redAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
 
-                <Button
-                  sx={{
-                    backgroundColor: colors.greenAccent[700],
-                    color: colors.grey[100],
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    padding: '10px 20px',
-                    mt: '30px',
-                  }}
-                  onClick={handleUpdate}
-                >
-                  Update
-                </Button>
-              </DialogActions>
-            </Dialog>
+              <Button
+                sx={{
+                  backgroundColor: colors.greenAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleUpdate}
+              >
+                Update
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Box>
       )}
     </>

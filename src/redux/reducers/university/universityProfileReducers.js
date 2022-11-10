@@ -97,6 +97,7 @@ export const universityProfileReducer = (
       return {
         ...state,
         mous: {
+          ...state.mous,
           loading: true,
         },
       };
@@ -104,6 +105,7 @@ export const universityProfileReducer = (
       return {
         ...state,
         mous: {
+          ...state.mous,
           loading: false,
           mous: action.payload,
         },
@@ -113,6 +115,7 @@ export const universityProfileReducer = (
         ...state,
         mous: {
           ...state.mous,
+          loading: false,
           updated: action.payload,
         },
       };
@@ -120,6 +123,7 @@ export const universityProfileReducer = (
       return {
         ...state,
         mous: {
+          ...state.mous,
           loading: false,
           error: action.payload,
         },
@@ -129,31 +133,43 @@ export const universityProfileReducer = (
         ...state,
         mous: {
           ...state.mous,
+          loading: false,
           error: action.payload,
         },
-      }
+      };
     case UNIVERSITY_PROFILE_CONTACT_REQUEST:
     case UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST:
       return {
         ...state,
         contacts: {
+          ...state.contacts,
           loading: true,
         },
       };
     case UNIVERSITY_PROFILE_CONTACT_SUCCESS:
-    case UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS:
       return {
         ...state,
         contacts: {
+          ...state.contacts,
           loading: false,
           contacts: action.payload,
         },
       };
+    case UNIVERSITY_PROFILE_CONTACT_UPDATE_SUCCESS:
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          loading: false,
+          updated: action.payload,
+        },
+      }
     case UNIVERSITY_PROFILE_CONTACT_FAIL:
     case UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL:
       return {
         ...state,
         contacts: {
+          ...state.contacts,
           loading: false,
           error: action.payload,
         },

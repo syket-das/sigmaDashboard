@@ -21,7 +21,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import TextRow from '../../../components/text/TextRow';
-import { universityProfileContacts } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileContacts,
+  updateUniversityProfileContacts,
+} from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileContacts = () => {
@@ -43,6 +46,7 @@ const UniversityProfileContacts = () => {
   const [email, setEmail] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [designation, setDesignation] = React.useState('');
+  const [contactId, setContactId] = React.useState('');
 
   const handleClickOpen = (contact) => {
     setOpen(true);
@@ -50,6 +54,7 @@ const UniversityProfileContacts = () => {
     setEmail(contact.email);
     setPhone(contact.phone);
     setDesignation(contact.description);
+    setContactId(contact._id);
   };
 
   const handleClose = () => {
@@ -62,6 +67,12 @@ const UniversityProfileContacts = () => {
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('description', designation);
+
+    dispatch(updateUniversityProfileContacts(contactId, formData));
+
+    setTimeout(() => {
+      dispatch(universityProfileContacts(params.id));
+    }, 1000);
   };
 
   return (
@@ -252,7 +263,7 @@ const UniversityProfileContacts = () => {
                     padding: '10px 20px',
                     mt: '30px',
                   }}
-                  onClick={handleUpdate()}
+                  onClick={handleUpdate}
                 >
                   Update
                 </Button>
