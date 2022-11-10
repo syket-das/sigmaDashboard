@@ -1,8 +1,15 @@
 import {
   Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   List,
   ListItemButton,
   ListItemText,
+  TextField,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -18,11 +25,29 @@ const UniversityProfileDocumentsRequired = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const {loading,error, documents} = useSelector(state => state.universityProfile.documents)
+  const { loading, error, documents } = useSelector(
+    (state) => state.universityProfile.documents
+  );
 
   useEffect(() => {
     dispatch(universityProfileDocuments(params.id));
   }, [dispatch, params.id]);
+
+  const [open, setOpen] = React.useState(false);
+  const [title, setTitle] = React.useState('');
+
+  const handleClickOpen = (doc) => {
+    setOpen(true);
+    setTitle(doc.title);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleUpdate = () => {
+    const formData = new FormData();
+    formData.append('title', title);
+  };
 
   return (
     <Box
@@ -51,11 +76,63 @@ const UniversityProfileDocumentsRequired = () => {
                 maxHeight: '100px',
                 overflow: 'auto',
               }}
+              onClick={() => handleClickOpen(doc)}
             >
               <ListItemText primary={doc.title} />
             </ListItemButton>
           ))}
         </List>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Update University Document Details</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To update the document details of the university, please enter the
+              details here. If you don't want to update click cancel.
+            </DialogContentText>
+            <form>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="title"
+                label="Title"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              sx={{
+                backgroundColor: colors.redAccent[700],
+                color: colors.grey[100],
+                fontSize: '14px',
+                fontWeight: 'bold',
+                padding: '10px 20px',
+                mt: '30px',
+              }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+
+            <Button
+              sx={{
+                backgroundColor: colors.greenAccent[700],
+                color: colors.grey[100],
+                fontSize: '14px',
+                fontWeight: 'bold',
+                padding: '10px 20px',
+                mt: '30px',
+              }}
+              onClick={handleUpdate()}
+            >
+              Update
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Box>
   );
