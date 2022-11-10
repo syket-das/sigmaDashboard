@@ -101,7 +101,6 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_MOU_SUCCESS:
-    case UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS:
       return {
         ...state,
         mous: {
@@ -109,8 +108,15 @@ export const universityProfileReducer = (
           mous: action.payload,
         },
       };
+    case UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS:
+      return {
+        ...state,
+        mous: {
+          ...state.mous,
+          updated: action.payload,
+        },
+      };
     case UNIVERSITY_PROFILE_MOU_FAIL:
-    case UNIVERSITY_PROFILE_MOU_UPDATE_FAIL:
       return {
         ...state,
         mous: {
@@ -118,6 +124,14 @@ export const universityProfileReducer = (
           error: action.payload,
         },
       };
+    case UNIVERSITY_PROFILE_MOU_UPDATE_FAIL:
+      return {
+        ...state,
+        mous: {
+          ...state.mous,
+          error: action.payload,
+        },
+      }
     case UNIVERSITY_PROFILE_CONTACT_REQUEST:
     case UNIVERSITY_PROFILE_CONTACT_UPDATE_REQUEST:
       return {

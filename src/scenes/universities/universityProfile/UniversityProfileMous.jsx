@@ -27,7 +27,11 @@ import {
 import { useParams } from 'react-router-dom';
 import { tokens } from '../../../theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { universityProfileMOUS as uniMous } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileMOUS as uniMous,
+  updateUniversityProfileMOUS,
+} from '../../../redux/actions/university/universityProfileActions';
+import { toast } from 'react-toastify';
 
 const UniversityProfileMous = () => {
   const theme = useTheme();
@@ -35,19 +39,29 @@ const UniversityProfileMous = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
+
+
   const { loading, error, mous } = useSelector(
     (state) => state.universityProfile.mous
   );
 
+  const [mouList, setMouList] = React.useState([]);
+
+
   useEffect(() => {
+    if (error) {
+      toast(error);
+    }
+
     dispatch(uniMous(params.id));
-  }, [dispatch, params.id]);
+  }, [dispatch, params.id, error]);
 
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState('');
   const [type, setType] = React.useState('');
   const [startDate, setStartDate] = React.useState('');
   const [endDate, setEndDate] = React.useState('');
+  const [mouId, setMouId] = React.useState('');
 
   const handleClickOpen = (mou) => {
     setOpen(true);
@@ -55,6 +69,7 @@ const UniversityProfileMous = () => {
     setType(mou.type);
     setStartDate(mou.startDate);
     setEndDate(mou.endDate);
+    setMouId(mou._id);
   };
 
   const handleClose = () => {
@@ -67,6 +82,10 @@ const UniversityProfileMous = () => {
     formData.append('type', type);
     formData.append('startDate', startDate);
     formData.append('endDate', endDate);
+
+    dispatch(updateUniversityProfileMOUS(mouId, formData));
+    dispatch(uniMous(params.id));
+    
   };
 
   return (
@@ -104,14 +123,14 @@ const UniversityProfileMous = () => {
             overflow="auto"
             mt="10px"
           >
-            {mous?.mous.map((mou) => (
+            {mous?.mous?.map((mou) => (
               <Card
                 sx={{
                   display: 'flex',
                   width: '100%',
                   mt: '10px',
                 }}
-                key={mou._id}
+                key={mou?._id}
               >
                 <Box
                   sx={{
@@ -122,17 +141,17 @@ const UniversityProfileMous = () => {
                 >
                   <CardContent sx={{ flex: '1 ' }}>
                     <Typography component="div" variant="h4" textAlign="center">
-                      {mou.title}
+                      {mou?.title}
                     </Typography>
                     <Divider />
                     <Typography component="div" variant="h5">
-                      Type : <b>{mou.type}</b>
+                      Type : <b>{mou?.type}</b>
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary">
-                      <b>Start Date</b> : {mou.startDate}
+                      <b>Start Date</b> : {mou?.startDate}
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary">
-                      <b>End Date</b> : {mou.endDate}
+                      <b>End Date</b> : {mou?.endDate}
                     </Typography>
 
                     <Stack
@@ -144,7 +163,7 @@ const UniversityProfileMous = () => {
                       <IconButton
                         aria-label="download"
                         color="secondary"
-                        onClick={() => window.open(mou.file.f_url)}
+                        onClick={() => window.open(mou?.file.f_url)}
                       >
                         <Download />
                       </IconButton>
@@ -162,7 +181,7 @@ const UniversityProfileMous = () => {
 
                 <CardMedia component="div">
                   <iframe
-                    src={` https://docs.google.com/gview?url=${mou.file.f_url}&embedded=true#toolbar=0&navpanes=0&scrollbar=0`}
+                    src={` https://docs.google.com/gview?url=${mou?.file.f_url}&embedded=true#toolbar=0&navpanes=0&scrollbar=0`}
                     width="100%"
                     title="pdf"
                     frameborder="0"
@@ -173,6 +192,7 @@ const UniversityProfileMous = () => {
                 </CardMedia>
               </Card>
             ))}
+          </Box>
             <Dialog open={open} onClose={handleClose}>
               <DialogTitle>Update University MOU Details</DialogTitle>
               <DialogContent>
@@ -248,13 +268,12 @@ const UniversityProfileMous = () => {
                     padding: '10px 20px',
                     mt: '30px',
                   }}
-                  onClick={handleUpdate()}
+                  onClick={handleUpdate}
                 >
                   Update
                 </Button>
               </DialogActions>
             </Dialog>
-          </Box>
         </Box>
       )}
     </>

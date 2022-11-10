@@ -17,7 +17,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import TextRow from '../../../components/text/TextRow';
-import { universityProfileBasic } from '../../../redux/actions/university/universityProfileActions';
+import { universityProfileBasic, updateUniversityProfileBasic } from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileBasic = () => {
@@ -62,6 +62,10 @@ const UniversityProfileBasic = () => {
     formData.append('city', city);
     formData.append('address', address);
     formData.append('website', website);
+
+
+    dispatch(updateUniversityProfileBasic(params.id, formData));
+
   };
 
   return (

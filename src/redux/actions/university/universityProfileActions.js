@@ -6,6 +6,9 @@ import {
   UNIVERSITY_PROFILE_BASIC_FAIL,
   UNIVERSITY_PROFILE_BASIC_REQUEST,
   UNIVERSITY_PROFILE_BASIC_SUCCESS,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_BASIC_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_CONTACT_FAIL,
   UNIVERSITY_PROFILE_CONTACT_REQUEST,
   UNIVERSITY_PROFILE_CONTACT_SUCCESS,
@@ -18,6 +21,9 @@ import {
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
+  UNIVERSITY_PROFILE_MOU_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_MOU_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_PROGRAM_FAIL,
   UNIVERSITY_PROFILE_PROGRAM_REQUEST,
   UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
@@ -28,6 +34,7 @@ import {
 
 const baseUrl = 'https://sigmalpu.herokuapp.com';
 
+// University Profile Basic
 export const universityProfileBasic = (universityId) => async (dispatch) => {
   try {
     dispatch({ type: UNIVERSITY_PROFILE_BASIC_REQUEST });
@@ -51,6 +58,35 @@ export const universityProfileBasic = (universityId) => async (dispatch) => {
   }
 };
 
+export const updateUniversityProfileBasic =
+  (basicId, formData) => async (dispatch) => {
+    try {
+      dispatch({ type: UNIVERSITY_PROFILE_BASIC_UPDATE_REQUEST });
+
+      const { data } = await axios.put(
+        `${baseUrl}/api/v2/university/${basicId}/update`,
+        formData
+      );
+
+      dispatch({
+        type: UNIVERSITY_PROFILE_BASIC_UPDATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UNIVERSITY_PROFILE_BASIC_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// University Profile Basic
+
+// University Profile MOU
+
 export const universityProfileMOUS = (universityId) => async (dispatch) => {
   try {
     dispatch({ type: UNIVERSITY_PROFILE_MOU_REQUEST });
@@ -73,6 +109,33 @@ export const universityProfileMOUS = (universityId) => async (dispatch) => {
     });
   }
 };
+
+export const updateUniversityProfileMOUS =
+  (mouId, formData) => async (dispatch) => {
+    try {
+      dispatch({ type: UNIVERSITY_PROFILE_MOU_UPDATE_REQUEST });
+
+      const { data } = await axios.put(
+        `${baseUrl}/api/v2/university/mou/${mouId}/update`,
+        formData
+      );
+
+      dispatch({
+        type: UNIVERSITY_PROFILE_MOU_UPDATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UNIVERSITY_PROFILE_MOU_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// University Profile MOU
 
 export const universityProfileContacts = (universityId) => async (dispatch) => {
   try {
