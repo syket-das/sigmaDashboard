@@ -17,8 +17,12 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tokens } from '../../../theme';
-import { universityProfileAggrements } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileAggrements,
+  updateUniversityProfileAggrements,
+} from '../../../redux/actions/university/universityProfileActions';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const UniversityProfileAgreements = () => {
   const theme = useTheme();
@@ -31,15 +35,20 @@ const UniversityProfileAgreements = () => {
   );
 
   useEffect(() => {
+    if (error) {
+      toast(error);
+    }
     dispatch(universityProfileAggrements(params.id));
-  }, [dispatch, params.id]);
+  }, [dispatch, params.id, error]);
 
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState('');
+  const [aggrementId, setAggrementId] = React.useState('');
 
   const handleClickOpen = (aggrement) => {
     setOpen(true);
     setTitle(aggrement.title);
+    setAggrementId(aggrement._id);
   };
 
   const handleClose = () => {
@@ -49,6 +58,11 @@ const UniversityProfileAgreements = () => {
   const handleUpdate = () => {
     const formData = new FormData();
     formData.append('title', title);
+
+    dispatch(updateUniversityProfileAggrements(aggrementId, formData));
+    setTimeout(() => {
+      dispatch(universityProfileAggrements(params.id));
+    }, 1000);
   };
 
   return (
@@ -129,7 +143,7 @@ const UniversityProfileAgreements = () => {
                 padding: '10px 20px',
                 mt: '30px',
               }}
-              onClick={handleUpdate()}
+              onClick={handleUpdate}
             >
               Update
             </Button>

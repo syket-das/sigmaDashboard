@@ -163,7 +163,7 @@ export const universityProfileReducer = (
           loading: false,
           updated: action.payload,
         },
-      }
+      };
     case UNIVERSITY_PROFILE_CONTACT_FAIL:
     case UNIVERSITY_PROFILE_CONTACT_UPDATE_FAIL:
       return {
@@ -183,7 +183,6 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS:
-    case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS:
       return {
         ...state,
         aggrements: {
@@ -191,11 +190,21 @@ export const universityProfileReducer = (
           aggrements: action.payload,
         },
       };
+    case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS:
+      return {
+        ...state,
+        aggrements: {
+          ...state.aggrements,
+          loading: false,
+          updated: action.payload,
+        },
+      }
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL:
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL:
       return {
         ...state,
         aggrements: {
+          ...state.aggrements,
           loading: false,
           error: action.payload,
         },

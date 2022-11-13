@@ -21,6 +21,9 @@ import {
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
@@ -36,6 +39,7 @@ import {
 } from '../../constants/university/UniversityProfileConstants';
 
 const baseUrl = 'https://sigmalpu.herokuapp.com';
+const localUrl = 'http://localhost:5000';
 
 // University Profile Basic
 export const universityProfileBasic = (universityId) => async (dispatch) => {
@@ -194,6 +198,9 @@ export const updateUniversityProfileContacts =  (contactId, formData) => async (
 
 // University Profile Contact
 
+
+// University Profile Aggrements
+
 export const universityProfileAggrements =
   (universityId) => async (dispatch) => {
     try {
@@ -217,6 +224,34 @@ export const universityProfileAggrements =
       });
     }
   };
+
+export const updateUniversityProfileAggrements = (aggrementId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `${localUrl}/api/v2/university/extra/finincialAgreements/${aggrementId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+// University Profile Aggrements
+
+
 
 export const universityProfileUpdates = (universityId) => async (dispatch) => {
   try {
