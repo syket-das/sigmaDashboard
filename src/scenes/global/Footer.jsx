@@ -10,7 +10,7 @@ const Footer = () => {
           variant="h5"
           sx={{
             textAlign: 'center',
-            mr: '15px',
+            mr: '10px',
           }}
         >
           Developed By{' '}
@@ -20,13 +20,12 @@ const Footer = () => {
             textDecoration: 'none',
             color: 'lightgreen',
             fontWeight: 'bold',
-            fontSize: '14px',
           }}
           href="http://syket-das.me"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Syket Das
+            <Typography variant="h5">Syket Das</Typography>
         </a>
       </Box>
     </Box>
