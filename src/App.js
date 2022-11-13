@@ -19,6 +19,7 @@ import Calendar from './scenes/calendar/calendar';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import PartnerUniversities from './scenes/universities/PartnerUniversities';
 import UniversityProfile from './scenes/universities/universityProfile/UniversityProfile';
+import Footer from './scenes/global/Footer';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -73,6 +74,7 @@ function App() {
                 }
               />
             </Routes>
+            {user && <Footer setIsSidebar={setIsSidebar} />}
           </main>
         </div>
       </ThemeProvider>

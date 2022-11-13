@@ -6,6 +6,7 @@ import {
   CardActionArea,
   CardMedia,
   TextField,
+  Typography,
 } from '@mui/material';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -14,7 +15,6 @@ import Header from '../../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { HashLoader } from 'react-spinners';
 import { login } from '../../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import HashLoaderComponent from '../../components/loader/HashLoaderComponent';
@@ -126,6 +126,35 @@ const Login = () => {
           </Formik>
         </Box>
       )}
+      <Box
+        style={{
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginVertical: '20px',
+        }}
+      >
+        <Typography
+          sx={{
+            mx: '10px',
+          }}
+        >
+          Developed By
+        </Typography>
+        <a
+          style={{
+            textDecoration: 'dashed',
+            color: 'lightgreen',
+            cursor: 'revert',
+          }}
+          href="http://syket-das.me"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Syket Das
+        </a>
+      </Box>
     </>
   );
 };
