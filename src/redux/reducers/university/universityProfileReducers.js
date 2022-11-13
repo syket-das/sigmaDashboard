@@ -186,6 +186,7 @@ export const universityProfileReducer = (
       return {
         ...state,
         aggrements: {
+          ...state.aggrements,
           loading: false,
           aggrements: action.payload,
         },
@@ -198,7 +199,7 @@ export const universityProfileReducer = (
           loading: false,
           updated: action.payload,
         },
-      }
+      };
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL:
     case UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL:
       return {
@@ -218,12 +219,21 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_UPDATES_SUCCESS:
+      return {
+        ...state,
+        updates: {
+          ...state.updates,
+          loading: false,
+          updates: action.payload,
+        },
+      };
     case UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS:
       return {
         ...state,
         updates: {
+          ...state.updates,
           loading: false,
-          updates: action.payload,
+          updated: action.payload,
         },
       };
     case UNIVERSITY_PROFILE_UPDATES_FAIL:
@@ -244,14 +254,24 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_DOCUMENT_SUCCESS:
-    case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS:
       return {
         ...state,
         documents: {
+          ...state.documents,
           loading: false,
           documents: action.payload,
         },
       };
+    case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS:
+      return {
+        ...state,
+        documents: {
+          ...state.documents,
+          loading: false,
+          updated: action.payload,
+        },
+      };
+
     case UNIVERSITY_PROFILE_DOCUMENT_FAIL:
     case UNIVERSITY_PROFILE_DOCUMENT_UPDATE_FAIL:
       return {
@@ -270,12 +290,21 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_APPLICATION_SUCCESS:
+      return {
+        ...state,
+        applicationProcess: {
+          ...state.applicationProcess,
+          loading: false,
+          applicationProcess: action.payload,
+        },
+      };
     case UNIVERSITY_PROFILE_APPLICATION_UPDATE_SUCCESS:
       return {
         ...state,
         applicationProcess: {
+          ...state.applicationProcess,
           loading: false,
-          applicationProcess: action.payload,
+          updated: action.payload,
         },
       };
 
@@ -298,12 +327,21 @@ export const universityProfileReducer = (
         },
       };
     case UNIVERSITY_PROFILE_PROGRAM_SUCCESS:
+      return {
+        ...state,
+        programs: {
+          ...state.programs,
+          loading: false,
+          programs: action.payload,
+        },
+      };
     case UNIVERSITY_PROFILE_PROGRAM_UPDATE_SUCCESS:
       return {
         ...state,
         programs: {
+          ...state.programs,
           loading: false,
-          programs: action.payload,
+          updated: action.payload,
         },
       };
     case UNIVERSITY_PROFILE_PROGRAM_FAIL:

@@ -16,7 +16,10 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { universityProfileApplications } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileApplications,
+  updateUniversityProfileApplications,
+} from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileApplicationProcess = () => {
@@ -36,10 +39,12 @@ const UniversityProfileApplicationProcess = () => {
 
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState('');
+  const [applicationId, setApplicationId] = React.useState('');
 
   const handleClickOpen = (process) => {
     setOpen(true);
     setTitle(process.title);
+    setApplicationId(process._id);
   };
 
   const handleClose = () => {
@@ -48,6 +53,12 @@ const UniversityProfileApplicationProcess = () => {
   const handleUpdate = () => {
     const formData = new FormData();
     formData.append('title', title);
+
+    dispatch(updateUniversityProfileApplications(applicationId, formData));
+
+    setTimeout(() => {
+      dispatch(universityProfileApplications(params.id));
+    }, 1000);
   };
 
   return (
@@ -131,7 +142,7 @@ const UniversityProfileApplicationProcess = () => {
                 padding: '10px 20px',
                 mt: '30px',
               }}
-              onClick={handleUpdate()}
+              onClick={handleUpdate}
             >
               Update
             </Button>

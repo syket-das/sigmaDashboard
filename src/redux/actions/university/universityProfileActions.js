@@ -3,6 +3,9 @@ import {
   UNIVERSITY_PROFILE_APPLICATION_FAIL,
   UNIVERSITY_PROFILE_APPLICATION_REQUEST,
   UNIVERSITY_PROFILE_APPLICATION_SUCCESS,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_APPLICATION_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_BASIC_FAIL,
   UNIVERSITY_PROFILE_BASIC_REQUEST,
   UNIVERSITY_PROFILE_BASIC_SUCCESS,
@@ -18,6 +21,9 @@ import {
   UNIVERSITY_PROFILE_DOCUMENT_FAIL,
   UNIVERSITY_PROFILE_DOCUMENT_REQUEST,
   UNIVERSITY_PROFILE_DOCUMENT_SUCCESS,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_FAIL,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_REQUEST,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_SUCCESS,
@@ -33,9 +39,15 @@ import {
   UNIVERSITY_PROFILE_PROGRAM_FAIL,
   UNIVERSITY_PROFILE_PROGRAM_REQUEST,
   UNIVERSITY_PROFILE_PROGRAM_SUCCESS,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_PROGRAM_UPDATE_SUCCESS,
   UNIVERSITY_PROFILE_UPDATES_FAIL,
   UNIVERSITY_PROFILE_UPDATES_REQUEST,
   UNIVERSITY_PROFILE_UPDATES_SUCCESS,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_FAIL,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_REQUEST,
+  UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS,
 } from '../../constants/university/UniversityProfileConstants';
 
 const baseUrl = 'https://sigmalpu.herokuapp.com';
@@ -230,7 +242,7 @@ export const updateUniversityProfileAggrements = (aggrementId, formData) => asyn
     dispatch({ type: UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST });
 
     const { data } = await axios.put(
-      `${localUrl}/api/v2/university/extra/finincialAgreements/${aggrementId}/update`,
+      `${baseUrl}/api/v2/university/extra/finincialAgreements/${aggrementId}/update`,
       formData
     );
 
@@ -252,6 +264,7 @@ export const updateUniversityProfileAggrements = (aggrementId, formData) => asyn
 // University Profile Aggrements
 
 
+// University Profile  Updates
 
 export const universityProfileUpdates = (universityId) => async (dispatch) => {
   try {
@@ -275,6 +288,35 @@ export const universityProfileUpdates = (universityId) => async (dispatch) => {
     });
   }
 };
+
+
+export const updateUniversityProfileUpdates = (updateId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_UPDATES_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `${baseUrl}/api/v2/university/update/${updateId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_UPDATES_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+// University Profile  Updates
+
+// University Profile  Documents
 
 export const universityProfileDocuments =
   (universityId) => async (dispatch) => {
@@ -300,6 +342,35 @@ export const universityProfileDocuments =
     }
   };
 
+
+export const updateUniversityProfileDocuments = (documentId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_DOCUMENT_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `${baseUrl}/api/v2/university/extra/documents/${documentId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_DOCUMENT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_DOCUMENT_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+  // University Profile  Documents
+
+  // University Profile  Applications
+
 export const universityProfileApplications =
   (universityId) => async (dispatch) => {
     try {
@@ -324,6 +395,35 @@ export const universityProfileApplications =
     }
   };
 
+export const updateUniversityProfileApplications = (applicationId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_APPLICATION_UPDATE_REQUEST });
+
+    const { data } = await axios.put(
+      `${baseUrl}/api/v2/university/extra/applications/${applicationId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_APPLICATION_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_APPLICATION_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+
+  // University Profile  Applications
+
+  // University Profile  Courses
+
 export const universityProfilePrograms = (universityId) => async (dispatch) => {
   try {
     dispatch({ type: UNIVERSITY_PROFILE_PROGRAM_REQUEST });
@@ -346,3 +446,32 @@ export const universityProfilePrograms = (universityId) => async (dispatch) => {
     });
   }
 };
+
+export const updateUniversityProfilePrograms = (programId, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_PROGRAM_UPDATE_REQUEST });
+    
+    const { data } = await axios.put(
+      `${baseUrl}/api/v2/university/program/${programId}/update`,
+      formData
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_PROGRAM_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_PROGRAM_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+
+
+
+// University Profile  Courses

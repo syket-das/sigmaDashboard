@@ -16,7 +16,10 @@ import { useTheme } from '@mui/material';
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-import { universityProfilePrograms } from '../../redux/actions/university/universityProfileActions';
+import {
+  universityProfilePrograms,
+  updateUniversityProfilePrograms,
+} from '../../redux/actions/university/universityProfileActions';
 
 const UniversityPrograms = () => {
   const dispatch = useDispatch();
@@ -27,21 +30,13 @@ const UniversityPrograms = () => {
     (state) => state.universityProfile.programs
   );
 
-  const [programList, setProgramList] = React.useState([]);
-
   useEffect(() => {
     if (error) {
       toast(error);
     }
 
     dispatch(universityProfilePrograms(params.id));
-
-    
   }, [dispatch, error, params.id]);
-
-
-
-
 
   const columns = [
     {
@@ -89,6 +84,7 @@ const UniversityPrograms = () => {
   const [foriegnName, setForiegnName] = React.useState('');
   const [tutionFees, setTutionFees] = React.useState('');
   const [scholarship, setScholarship] = React.useState('');
+  const [programId, setProgramId] = React.useState('');
 
   const handleClickOpen = (program) => {
     setOpen(true);
@@ -96,6 +92,7 @@ const UniversityPrograms = () => {
     setForiegnName(program.forign_name);
     setTutionFees(program.tutionFees);
     setScholarship(program.scholarship);
+    setProgramId(program._id);
   };
 
   const handleClose = () => {
@@ -108,10 +105,13 @@ const UniversityPrograms = () => {
     formData.append('forign_name', foriegnName);
     formData.append('tutionFees', tutionFees);
     formData.append('scholarship', scholarship);
+
+    dispatch(updateUniversityProfilePrograms(programId, formData));
+
+    setTimeout(() => {
+      dispatch(universityProfilePrograms(params.id));
+    }, 1000);
   };
-
-
-
 
   return (
     <div>
@@ -249,7 +249,7 @@ const UniversityPrograms = () => {
                   padding: '10px 20px',
                   mt: '30px',
                 }}
-                onClick={handleUpdate()}
+                onClick={handleUpdate}
               >
                 Update
               </Button>

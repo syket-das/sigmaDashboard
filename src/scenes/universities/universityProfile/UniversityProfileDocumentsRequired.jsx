@@ -16,7 +16,10 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { universityProfileDocuments } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileDocuments,
+  updateUniversityProfileDocuments,
+} from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileDocumentsRequired = () => {
@@ -35,10 +38,12 @@ const UniversityProfileDocumentsRequired = () => {
 
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState('');
+  const [documentId, setDocumentId] = React.useState('');
 
   const handleClickOpen = (doc) => {
     setOpen(true);
     setTitle(doc.title);
+    setDocumentId(doc._id);
   };
 
   const handleClose = () => {
@@ -47,6 +52,12 @@ const UniversityProfileDocumentsRequired = () => {
   const handleUpdate = () => {
     const formData = new FormData();
     formData.append('title', title);
+
+    dispatch(updateUniversityProfileDocuments(documentId, formData));
+
+    setTimeout(() => {
+      dispatch(universityProfileDocuments(params.id));
+    }, 1000);
   };
 
   return (
@@ -127,7 +138,7 @@ const UniversityProfileDocumentsRequired = () => {
                 padding: '10px 20px',
                 mt: '30px',
               }}
-              onClick={handleUpdate()}
+              onClick={handleUpdate}
             >
               Update
             </Button>

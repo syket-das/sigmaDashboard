@@ -17,7 +17,10 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { universityProfileUpdates } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileUpdates,
+  updateUniversityProfileUpdates,
+} from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileUpdates = () => {
@@ -36,10 +39,12 @@ const UniversityProfileUpdates = () => {
 
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
+  const [updateId, setUpdateId] = React.useState('');
 
   const handleClickOpen = (update) => {
     setOpen(true);
     setValue(update.value);
+    setUpdateId(update._id);
   };
 
   const handleClose = () => {
@@ -48,6 +53,12 @@ const UniversityProfileUpdates = () => {
   const handleUpdate = () => {
     const formData = new FormData();
     formData.append('value', value);
+
+    dispatch(updateUniversityProfileUpdates(updateId, formData));
+
+    setTimeout(() => {
+      dispatch(universityProfileUpdates(params.id));
+    }, 1000);
   };
 
   return (
@@ -132,7 +143,7 @@ const UniversityProfileUpdates = () => {
                 padding: '10px 20px',
                 mt: '30px',
               }}
-              onClick={handleUpdate()}
+              onClick={handleUpdate}
             >
               Update
             </Button>
