@@ -32,6 +32,7 @@ import {
   updateUniversityProfileMOUS,
 } from '../../../redux/actions/university/universityProfileActions';
 import { toast } from 'react-toastify';
+import InfoTooltip from '../../../components/InfoTooltip';
 
 const UniversityProfileMous = () => {
   const theme = useTheme();
@@ -157,6 +158,12 @@ const UniversityProfileMous = () => {
                       justifyContent="space-between"
                       m={'5px'}
                     >
+                      <InfoTooltip
+                        createdBy={mou?.createdBy}
+                        createdAt={mou?.createdAt}
+                        updatedBy={mou?.updatedBy}
+                        updatedAt={mou.updatedAt || 'Not Updated Yet'}
+                      />
                       <IconButton
                         aria-label="download"
                         color="secondary"

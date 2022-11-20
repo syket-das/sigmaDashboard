@@ -23,6 +23,7 @@ import {
 } from '../../../redux/actions/university/universityProfileActions';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import InfoTooltip from '../../../components/InfoTooltip';
 
 const UniversityProfileAgreements = () => {
   const theme = useTheme();
@@ -94,7 +95,18 @@ const UniversityProfileAgreements = () => {
                 overflow: 'auto',
               }}
             >
-              <ListItemText primary={aggrement?.title} />
+              <ListItemText
+                primary={<>
+                  {' '}
+                  <InfoTooltip
+                    createdBy={aggrement?.createdBy}
+                    createdAt={aggrement?.createdAt}
+                    updatedBy={aggrement?.updatedBy}
+                    updatedAt={aggrement?.updatedAt}
+                  />
+                  {aggrement.title}
+                </>}
+              />
             </ListItemButton>
           ))}
         </List>

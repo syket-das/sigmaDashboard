@@ -20,6 +20,7 @@ import {
   universityProfilePrograms,
   updateUniversityProfilePrograms,
 } from '../../redux/actions/university/universityProfileActions';
+import InfoTooltip from '../../components/InfoTooltip';
 
 const UniversityPrograms = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,21 @@ const UniversityPrograms = () => {
       headerName: 'Scholarship',
       flex: 1,
     },
-
+    {
+      field: 'info',
+      headerName: 'Info',
+      flex: 0.5,
+      renderCell: (cellValue) => {
+        return (
+          <InfoTooltip
+            createdBy={cellValue.row.createdBy}
+            createdAt={cellValue.row.createdAt}
+            updatedBy={cellValue.row.updatedBy}
+            updatedAt={cellValue.row.updatedAt}
+          />
+        );
+      },
+    },
     {
       field: 'update',
       headerName: 'Update',

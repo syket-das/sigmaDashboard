@@ -16,6 +16,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import InfoTooltip from '../../../components/InfoTooltip';
 import {
   universityProfileDocuments,
   updateUniversityProfileDocuments,
@@ -89,7 +90,20 @@ const UniversityProfileDocumentsRequired = () => {
               }}
               onClick={() => handleClickOpen(doc)}
             >
-              <ListItemText primary={doc.title} />
+              <ListItemText
+                primary={
+                  <>
+                    {' '}
+                    <InfoTooltip
+                      createdBy={doc?.createdBy}
+                      createdAt={doc?.createdAt}
+                      updatedBy={doc?.updatedBy}
+                      updatedAt={doc?.updatedAt}
+                    />
+                    {doc.title}
+                  </>
+                }
+              />
             </ListItemButton>
           ))}
         </List>

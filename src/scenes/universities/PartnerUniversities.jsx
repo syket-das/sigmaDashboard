@@ -9,14 +9,17 @@ import { universityList } from '../../redux/actions/university/universityActions
 import { toast } from 'react-toastify';
 import HashLoaderComponent from '../../components/loader/HashLoaderComponent';
 import { Link } from 'react-router-dom';
+import InfoTooltip from '../../components/InfoTooltip';
 
 const PartnerUniversities = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { loading, error, universities } = useSelector(
-    (state) => state.universityList
-  );
+  const {
+    loading,
+    error,
+    universities = {},
+  } = useSelector((state) => state.universityList);
 
   const { universities: universitityList = [] } = universities;
 
@@ -61,6 +64,22 @@ const PartnerUniversities = () => {
         </a>
       ),
     },
+    {
+      field: 'info',
+      headerName: 'Info',
+      flex: 0.5,
+      renderCell: (cellValue) => {
+        return (
+          <InfoTooltip
+            createdBy={cellValue.row.createdBy}
+            createdAt={cellValue.row.createdAt}
+            updatedBy={cellValue.row.updatedBy}
+            updatedAt={cellValue.row.updatedAt}
+          />
+        );
+      },
+    },
+
     {
       field: 'details',
       headerName: 'Details',

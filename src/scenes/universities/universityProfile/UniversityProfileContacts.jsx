@@ -20,6 +20,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import InfoTooltip from '../../../components/InfoTooltip';
 import TextRow from '../../../components/text/TextRow';
 import {
   universityProfileContacts,
@@ -110,6 +111,7 @@ const UniversityProfileContacts = () => {
             mt="10px"
           >
             <List sx={{ width: '100%', overflow: 'auto' }}>
+  
               {contacts?.contacts.map((contact) => (
                 <ListItemButton
                   onClick={() => handleClickOpen(contact)}
@@ -128,7 +130,18 @@ const UniversityProfileContacts = () => {
                     />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={contact.name}
+                    primary={
+                      <>
+                        <InfoTooltip
+                       
+                          createdBy={contact.createdBy}
+                          createdAt={contact?.createdAt}
+                          updatedBy={contact?.updatedBy}
+                          updatedAt={contact?.updatedAt}
+                        />
+                        {contact.name}
+                      </>
+                    }
                     secondary={
                       <React.Fragment>
                         <Typography

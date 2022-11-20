@@ -16,8 +16,12 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import InfoTooltip from '../../../components/InfoTooltip';
 import TextRow from '../../../components/text/TextRow';
-import { universityProfileBasic, updateUniversityProfileBasic } from '../../../redux/actions/university/universityProfileActions';
+import {
+  universityProfileBasic,
+  updateUniversityProfileBasic,
+} from '../../../redux/actions/university/universityProfileActions';
 import { tokens } from '../../../theme';
 
 const UniversityProfileBasic = () => {
@@ -63,9 +67,7 @@ const UniversityProfileBasic = () => {
     formData.append('address', address);
     formData.append('website', website);
 
-
     dispatch(updateUniversityProfileBasic(params.id, formData));
-
   };
 
   return (
@@ -225,20 +227,34 @@ const UniversityProfileBasic = () => {
               </Typography>
             </TextRow>
           </Box>
-          <Button
+          <Box
             sx={{
-              backgroundColor: colors.greenAccent[700],
-              color: colors.grey[100],
-              fontSize: '14px',
-              fontWeight: 'bold',
-              padding: '10px 20px',
-              mt: '30px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
-            onClick={handleClickOpen}
           >
-            <Update sx={{ mr: '10px' }} />
-            Update Details
-          </Button>
+            <InfoTooltip
+              createdBy={university?.university.createdBy.name}
+              createdAt={university?.university?.createdAt}
+              updatedBy={university?.university.updatedBy.name}
+              updatedAt={university?.university?.updatedAt}
+            />
+            <Button
+              sx={{
+                backgroundColor: colors.greenAccent[700],
+                color: colors.grey[100],
+                fontSize: '14px',
+                fontWeight: 'bold',
+                padding: '10px 20px',
+                mt: '30px',
+              }}
+              onClick={handleClickOpen}
+            >
+              <Update sx={{ mr: '10px' }} />
+              Update Details
+            </Button>
+          </Box>
           <Dialog
             open={open}
             onClose={handleClose}

@@ -16,6 +16,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import InfoTooltip from '../../../components/InfoTooltip';
 import {
   universityProfileApplications,
   updateUniversityProfileApplications,
@@ -90,7 +91,20 @@ const UniversityProfileApplicationProcess = () => {
               }}
               onClick={() => handleClickOpen(process)}
             >
-              <ListItemText primary={process.title} />
+              <ListItemText
+                primary={
+                  <>
+                    {' '}
+                    <InfoTooltip
+                      createdBy={process?.createdBy}
+                      createdAt={process?.createdAt}
+                      updatedBy={process?.updatedBy}
+                      updatedAt={process?.updatedAt}
+                    />
+                    {process.title}
+                  </>
+                }
+              />
             </ListItemButton>
           ))}
         </List>

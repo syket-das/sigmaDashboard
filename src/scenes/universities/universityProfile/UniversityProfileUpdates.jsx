@@ -17,6 +17,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import InfoTooltip from '../../../components/InfoTooltip';
 import {
   universityProfileUpdates,
   updateUniversityProfileUpdates,
@@ -91,8 +92,19 @@ const UniversityProfileUpdates = () => {
               onClick={() => handleClickOpen(update)}
             >
               <ListItemText
-                primary={update.createdAt}
-                secondary={<React.Fragment>{update.value}</React.Fragment>}
+                primary={
+                  <>
+                    {' '}
+                    <InfoTooltip
+                      createdBy={update?.createdBy}
+                      createdAt={update?.createdAt}
+                      updatedBy={update?.updatedBy}
+                      updatedAt={update?.updatedAt}
+                    />
+                    {update.type}
+                  </>
+                }
+                secondary={<React.Fragment> {update.value}</React.Fragment>}
               />
             </ListItemButton>
           ))}
