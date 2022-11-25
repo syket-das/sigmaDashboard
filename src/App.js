@@ -21,6 +21,7 @@ import PartnerUniversities from './scenes/universities/PartnerUniversities';
 import UniversityProfile from './scenes/universities/universityProfile/UniversityProfile';
 import Footer from './scenes/global/Footer';
 import Meetings from './scenes/meetings/Meetings';
+import MeetingProfile from './scenes/meetings/meetingProfile/MeetingProfile';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -83,6 +84,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Meetings />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/meetings/:id"
+                element={
+                  <ProtectedRoute>
+                    <MeetingProfile />
                   </ProtectedRoute>
                 }
               />

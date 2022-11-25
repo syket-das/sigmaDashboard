@@ -121,7 +121,7 @@ const UniversityProfileBasic = () => {
               />
 
               <Typography variant="h5">
-                {university?.university.name}
+                {university?.university?.name}
               </Typography>
             </TextRow>
 
@@ -235,9 +235,9 @@ const UniversityProfileBasic = () => {
             }}
           >
             <InfoTooltip
-              createdBy={university?.university.createdBy.name}
+              createdBy={university?.university.createdBy?.name}
               createdAt={university?.university?.createdAt}
-              updatedBy={university?.university.updatedBy.name}
+              updatedBy={university?.university.updatedBy?.name}
               updatedAt={university?.university?.updatedAt}
             />
             <Button

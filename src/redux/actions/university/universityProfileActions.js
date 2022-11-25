@@ -30,6 +30,9 @@ import {
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS,
+  UNIVERSITY_PROFILE_MEETING_FAIL,
+  UNIVERSITY_PROFILE_MEETING_REQUEST,
+  UNIVERSITY_PROFILE_MEETING_SUCCESS,
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
@@ -651,3 +654,38 @@ export const updateUniversityProfilePrograms =
   };
 
 // University Profile  Courses
+
+
+export const universityPrfileMeetings = (universityId) => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  };
+  try {
+    dispatch({ type: UNIVERSITY_PROFILE_MEETING_REQUEST });
+
+    const { data } = await axios.get(
+      `${baseUrl}/api/v2/meeting/university/${universityId}`,
+      config
+    );
+
+    dispatch({
+      type: UNIVERSITY_PROFILE_MEETING_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNIVERSITY_PROFILE_MEETING_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}

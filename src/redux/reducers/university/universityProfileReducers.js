@@ -29,6 +29,12 @@ import {
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_FAIL,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_REQUEST,
   UNIVERSITY_PROFILE_FININCIAL_AGREEMENT_UPDATE_SUCCESS,
+  UNIVERSITY_PROFILE_GUEST_FAIL,
+  UNIVERSITY_PROFILE_GUEST_REQUEST,
+  UNIVERSITY_PROFILE_GUEST_SUCCESS,
+  UNIVERSITY_PROFILE_MEETING_FAIL,
+  UNIVERSITY_PROFILE_MEETING_REQUEST,
+  UNIVERSITY_PROFILE_MEETING_SUCCESS,
   UNIVERSITY_PROFILE_MOU_FAIL,
   UNIVERSITY_PROFILE_MOU_REQUEST,
   UNIVERSITY_PROFILE_MOU_SUCCESS,
@@ -349,6 +355,60 @@ export const universityProfileReducer = (
       return {
         ...state,
         programs: {
+          loading: false,
+          error: action.payload,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_GUEST_REQUEST:
+      return {
+        ...state,
+        guestVisits: {
+          loading: true,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_GUEST_SUCCESS:
+      return {
+        ...state,
+        guestVisits: {
+          ...state.guestVisits,
+          loading: false,
+          guestVisits: action.payload,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_GUEST_FAIL:
+      return {
+        ...state,
+        guestVisits: {
+          loading: false,
+          error: action.payload,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_MEETING_REQUEST:
+      return {
+        ...state,
+        meetings: {
+          loading: true,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_MEETING_SUCCESS:
+      return {
+        ...state,
+        meetings: {
+          ...state.meetings,
+          loading: false,
+          meetings: action.payload.meetings,
+        },
+      };
+
+    case UNIVERSITY_PROFILE_MEETING_FAIL:
+      return {
+        ...state,
+        meetings: {
           loading: false,
           error: action.payload,
         },

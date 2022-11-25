@@ -60,7 +60,7 @@ const Meetings = () => {
       flex: 1,
       renderCell: (cellValue) => {
         return (
-          <Link to={`/partner-universities/${cellValue.row._id}`}>
+          <Link to={`/meetings/${cellValue.row._id}`}>
             <Button variant="contained" color="primary">
               Browse
             </Button>
