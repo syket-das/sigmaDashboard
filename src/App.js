@@ -20,14 +20,13 @@ import { ProtectedRoute } from './routes/ProtectedRoute';
 import PartnerUniversities from './scenes/universities/PartnerUniversities';
 import UniversityProfile from './scenes/universities/universityProfile/UniversityProfile';
 import Footer from './scenes/global/Footer';
+import Meetings from './scenes/meetings/Meetings';
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
   const { userInfo: user } = useSelector((state) => state.userLogin);
-
-  
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -72,6 +71,18 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <UniversityProfile />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Partner Universities */}
+
+              {/* Meetings */}
+              <Route
+                path="/meetings"
+                element={
+                  <ProtectedRoute>
+                    <Meetings />
                   </ProtectedRoute>
                 }
               />

@@ -82,7 +82,7 @@ const Login = () => {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        image="https://source.unsplash.com/random"
+                        image="https://source.unsplash.com/random/?university"
                         alt="green iguana"
                       />
                     </CardActionArea>

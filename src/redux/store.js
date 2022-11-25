@@ -8,12 +8,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers';
 import { universityListReducer } from './reducers/university/universityReducers';
 import { universityProfileReducer } from './reducers/university/universityProfileReducers';
+import { meetingListReducer } from './reducers/meeting/meetingReducers';
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   universityList: universityListReducer,
   universityProfile: universityProfileReducer,
+  meetingList: meetingListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
