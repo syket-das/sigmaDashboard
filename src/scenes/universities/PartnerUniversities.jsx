@@ -1,15 +1,30 @@
-import { Box, Button } from '@mui/material';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextareaAutosize,
+  TextField,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
 import { useTheme } from '@mui/material';
-import { useEffect } from 'react';
-import { universityList } from '../../redux/actions/university/universityActions';
+import React, { useEffect } from 'react';
+import {
+  addUniversity,
+  resetUniversity,
+  universityList,
+} from '../../redux/actions/university/universityActions';
 import { toast } from 'react-toastify';
 import HashLoaderComponent from '../../components/loader/HashLoaderComponent';
 import { Link } from 'react-router-dom';
 import InfoTooltip from '../../components/InfoTooltip';
+import { AddCircle } from '@mui/icons-material';
 
 const PartnerUniversities = () => {
   const dispatch = useDispatch();
@@ -19,7 +34,47 @@ const PartnerUniversities = () => {
     loading,
     error,
     universities = {},
+    newUniversity,
   } = useSelector((state) => state.universityList);
+
+  const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [website, setWebsite] = React.useState('');
+  const [address, setAddress] = React.useState('');
+  const [additionalInfo, setAdditionalInfo] = React.useState('');
+
+  const handleClickOpen = (aggrement) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCreate = () => {
+    setOpen(false);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('country', country);
+    formData.append('city', city);
+    formData.append('website', website);
+    formData.append('address', address);
+    formData.append('additionalInfo', additionalInfo);
+
+    dispatch(addUniversity(formData));
+    dispatch(resetUniversity());
+    dispatch(universityList());
+
+    setName('');
+    setCountry('');
+    setCity('');
+    setWebsite('');
+    setAddress('');
+    setAdditionalInfo('');
+  };
 
   const { universities: universitityList = [] } = universities;
 
@@ -28,8 +83,12 @@ const PartnerUniversities = () => {
       toast(error);
     }
 
+    if (newUniversity) {
+      toast('University added successfully');
+    }
+
     dispatch(universityList());
-  }, [dispatch, error]);
+  }, [dispatch, error, newUniversity]);
 
   const columns = [
     {
@@ -107,6 +166,28 @@ const PartnerUniversities = () => {
             subtitle="List of partner universities"
           />
           <Box
+            display="flex"
+            justifyContent="flex-end"
+            sx={{
+              position: 'relative',
+              bottom: '-30px',
+            }}
+          >
+            <Button
+              sx={{
+                backgroundColor: colors.blueAccent[700],
+                color: colors.grey[100],
+                fontSize: '14px',
+                fontWeight: 'bold',
+                padding: '10px 20px',
+              }}
+              endIcon={<AddCircle />}
+              onClick={handleClickOpen}
+            >
+              Add New
+            </Button>
+          </Box>
+          <Box
             m="40px 0 0 0"
             height="75vh"
             sx={{
@@ -145,6 +226,112 @@ const PartnerUniversities = () => {
               components={{ Toolbar: GridToolbar }}
             />
           </Box>
+
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Add New University</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To add university, please enter the details here. If you don't
+                want to create click cancel.
+              </DialogContentText>
+              <form>
+                <TextField
+                  margin="dense"
+                  id="name"
+                  label="Enter University Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="country"
+                  label="Enter Country"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="city"
+                  label="Enter City"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="address"
+                  label="Enter Address"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="website"
+                  label="Enter Website"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="additionalInfo"
+                  label="Additional Info (optional)"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={additionalInfo}
+                  onChange={(e) => setAdditionalInfo(e.target.value)}
+                  sx={{
+                    '& .MuiInputBase-input': {
+                      height: '100px',
+                    },
+                  }}
+                />
+              </form>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                sx={{
+                  backgroundColor: colors.redAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                sx={{
+                  backgroundColor: colors.greenAccent[700],
+                  color: colors.grey[100],
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  mt: '30px',
+                }}
+                onClick={handleCreate}
+              >
+                Update
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Box>
       )}
     </>
