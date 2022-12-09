@@ -26,8 +26,7 @@ import {
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants';
 
-
-const baseUrl = 'https://sigmalpu.herokuapp.com';
+const baseUrl = 'https://sigma-lpu-vsbd9.ondigitalocean.app';
 
 export const login = (email, password) => async (dispatch) => {
   try {

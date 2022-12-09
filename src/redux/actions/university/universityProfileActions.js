@@ -53,7 +53,7 @@ import {
   UNIVERSITY_PROFILE_UPDATES_UPDATE_SUCCESS,
 } from '../../constants/university/UniversityProfileConstants';
 
-const baseUrl = 'https://sigmalpu.herokuapp.com';
+const baseUrl = 'https://sigma-lpu-vsbd9.ondigitalocean.app';
 const localUrl = 'http://localhost:5000';
 
 // University Profile Basic
@@ -655,37 +655,37 @@ export const updateUniversityProfilePrograms =
 
 // University Profile  Courses
 
+export const universityPrfileMeetings =
+  (universityId) => async (dispatch, getState) => {
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-export const universityPrfileMeetings = (universityId) => async (dispatch, getState) => {
-  const {
-    userLogin: { userInfo },
-  } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    try {
+      dispatch({ type: UNIVERSITY_PROFILE_MEETING_REQUEST });
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${userInfo.token}`,
-    },
+      const { data } = await axios.get(
+        `${baseUrl}/api/v2/meeting/university/${universityId}`,
+        config
+      );
+
+      dispatch({
+        type: UNIVERSITY_PROFILE_MEETING_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UNIVERSITY_PROFILE_MEETING_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
   };
-  try {
-    dispatch({ type: UNIVERSITY_PROFILE_MEETING_REQUEST });
-
-    const { data } = await axios.get(
-      `${baseUrl}/api/v2/meeting/university/${universityId}`,
-      config
-    );
-
-    dispatch({
-      type: UNIVERSITY_PROFILE_MEETING_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: UNIVERSITY_PROFILE_MEETING_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-}

@@ -65,9 +65,8 @@ const PartnerUniversities = () => {
     formData.append('additionalInfo', additionalInfo);
 
     dispatch(addUniversity(formData));
-    dispatch(resetUniversity());
     dispatch(universityList());
-
+    dispatch(resetUniversity());
     setName('');
     setCountry('');
     setCity('');
@@ -85,9 +84,16 @@ const PartnerUniversities = () => {
 
     if (newUniversity) {
       toast('University added successfully');
+      dispatch(universityList());
     }
 
-    dispatch(universityList());
+    if (!error) {
+      dispatch(universityList());
+    }
+
+    return () => {
+      dispatch(resetUniversity());
+    };
   }, [dispatch, error, newUniversity]);
 
   const columns = [

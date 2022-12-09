@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  CLEAR_ERRORS,
   CREATE_UNIVERSITY_FAIL,
   CREATE_UNIVERSITY_REQUEST,
   CREATE_UNIVERSITY_SUCCESS,
@@ -9,7 +10,7 @@ import {
   UNIVERSITY_LIST_SUCCESS,
 } from '../../constants/university/universityConstants';
 
-const baseUrl = 'https://sigmalpu.herokuapp.com';
+const baseUrl = 'https://sigma-lpu-vsbd9.ondigitalocean.app';
 
 export const universityList = () => async (dispatch, getState) => {
   try {
@@ -83,6 +84,10 @@ export const addUniversity = (university) => async (dispatch, getState) => {
 };
 
 export const resetUniversity = () => (dispatch) => {
-  console.log('resetUniversity');
   dispatch({ type: RESET_UNIVERSITY });
 };
+
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
+}
